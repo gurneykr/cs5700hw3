@@ -1,5 +1,7 @@
 package examples.shapes;
 
+import java.util.stream.Stream;
+
 /**
  *
  *  Line
@@ -8,8 +10,7 @@ package examples.shapes;
  *
  */
 @SuppressWarnings("WeakerAccess")
-public class Line {
-
+public class Line implements Shape{
     private Point point1;
     private Point point2;
 
@@ -46,6 +47,15 @@ public class Line {
             throw new ShapeException("A line must have a length > 0");
     }
 
+    @Override
+    public Stream serialize() {
+        return null;
+    }
+
+    @Override
+    public Shape deserialize(Stream stream) throws ShapeException{
+        return null;
+    }
     /**
      * @return  The first point
      */

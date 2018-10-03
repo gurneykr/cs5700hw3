@@ -1,5 +1,7 @@
 package examples.shapes;
 
+import java.util.stream.Stream;
+
 /**
  * Circle
  *
@@ -7,7 +9,7 @@ package examples.shapes;
  *
  */
 @SuppressWarnings("WeakerAccess")
-public class Circle {
+public class Circle implements Shape{
     private Point center;
     private double radius;
 
@@ -39,6 +41,16 @@ public class Circle {
 
         this.center = center;
         this.radius = radius;
+    }
+
+    @Override
+    public Stream serialize() {
+        return null;
+    }
+
+    @Override
+    public Shape deserialize(Stream stream)throws ShapeException {
+        return null;
     }
 
     /**

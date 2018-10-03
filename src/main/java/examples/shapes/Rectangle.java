@@ -1,6 +1,8 @@
 package examples.shapes;
 
-public class Rectangle {
+import java.util.stream.Stream;
+
+public class Rectangle implements Shape{
     protected Point bottomLeft;
     protected Point bottomRight;
     protected Point topLeft;
@@ -15,6 +17,16 @@ public class Rectangle {
         this.topLeft = topLeft.copy();
         this.topRight = topRight.copy();
 
+    }
+
+    @Override
+    public Stream serialize() {
+        return null;
+    }
+
+    @Override
+    public Shape deserialize(Stream stream) throws ShapeException{
+        return null;
     }
 
     public Point getBottomLeft(){

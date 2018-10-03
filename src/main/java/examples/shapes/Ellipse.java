@@ -1,7 +1,8 @@
 package examples.shapes;
 import java.lang.Math;
+import java.util.stream.Stream;
 
-public class Ellipse {
+public class Ellipse implements Shape{
 
     private Point center;
     private double a;
@@ -18,6 +19,16 @@ public class Ellipse {
         this.a = a;
         this.b = b;
 
+    }
+
+    @Override
+    public Stream serialize() {
+        return null;
+    }
+
+    @Override
+    public Shape deserialize(Stream stream) throws ShapeException{
+        return null;
     }
 
     public Point getCenter()throws ShapeException{

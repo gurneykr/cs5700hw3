@@ -1,6 +1,8 @@
 package examples.shapes;
 
-public class Triangle {
+import java.util.stream.Stream;
+
+public class Triangle implements Shape{
     private Point a = new Point(1,1);
     private Point b = new Point(2,3);
     private Point c = new Point(3,1);
@@ -16,6 +18,17 @@ public class Triangle {
             throw new ShapeException("Invalid triangle");
         }
     }
+
+    @Override
+    public Stream serialize() {
+        return null;
+    }
+
+    @Override
+    public Shape deserialize(Stream stream) throws ShapeException{
+        return null;
+    }
+
     public Point getA(){
         Point point = null;
         try {

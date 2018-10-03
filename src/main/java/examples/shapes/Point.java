@@ -1,6 +1,8 @@
 package examples.shapes;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Point
@@ -8,7 +10,7 @@ import java.util.Objects;
  * This class represents point objects that can be moved and copied
  */
 @SuppressWarnings("WeakerAccess")
-public class Point {
+public class Point implements Shape{
     private double x;
     private double y;
 
@@ -88,5 +90,39 @@ public class Point {
      */
     public Point copy() throws ShapeException {
         return new Point(x, y);
+    }
+
+
+    @Override
+    public Stream serialize() {
+        //<Point::x=123:y=456>
+        //<Circle::radius=1234:center=<Point::x=123:y=456>
+
+       // String obj = "<Point::x="+ this.getX() + ",y=" + this.getY() + "::Point>";
+        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
+    }
+
+    @Override
+    public Shape deserialize(Stream stream) throws ShapeException{
+        //get the stream into a string
+        //parse it and create a shape object
+        String string = (String)stream.collect(Collectors.joining(""));
+        //System.out.println("deserialized Point is:" + string);
+
+        //tokenize the string to it's parts so that we can build a Point object
+        int startXIndex = string.indexOf("<Point::x=") + 10;
+        int endXIndex = string.indexOf(",y=");
+        Double x = Double.parseDouble(string.substring(startXIndex, endXIndex));
+
+        int startYIndex = string.indexOf(",y=") + 3;
+        int endYIndex = string.indexOf("::Point>");
+        Double y = Double.parseDouble(string.substring(startYIndex, endYIndex));
+
+        return new Point(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "<Point::x="+ this.getX() + ",y=" + this.getY() + "::Point>";
     }
 }
