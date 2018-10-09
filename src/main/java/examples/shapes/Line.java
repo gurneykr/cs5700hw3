@@ -1,5 +1,8 @@
 package examples.shapes;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -47,15 +50,6 @@ public class Line implements Shape{
             throw new ShapeException("A line must have a length > 0");
     }
 
-    @Override
-    public Stream serialize() {
-        return null;
-    }
-
-    //@Override
-    public Shape deserialize(Stream stream) throws ShapeException{
-        return null;
-    }
     /**
      * @return  The first point
      */
@@ -91,5 +85,38 @@ public class Line implements Shape{
      */
     public double computeSlope() {
         return (point2.getX() - point1.getX())/(point2.getY() - point1.getY());
+    }
+
+
+    @Override
+    public Stream serialize() {
+        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
+    }
+
+    //@Override
+    public static Line deserialize(Stream stream) throws ShapeException{
+        Line line = null;
+        String string = (String)stream.collect(Collectors.joining(""));
+
+        String regX = "<Line::point1=(\\S+),point2=(\\S+)::Line>";
+        Pattern p = Pattern.compile(regX);
+        Matcher m = p.matcher(string);
+        if(m.find()){
+            String point1String = m.group(1);
+            Stream streamPoint1 = point1String.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point point1 = Point.deserialize(streamPoint1);
+
+            String point2String = m.group(2);
+            Stream streamPoint2 = point2String.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point point2 = Point.deserialize(streamPoint2);
+
+            line = new Line(point1, point2);
+        }
+        return line;
+    }
+
+    @Override
+    public String toString() {
+        return "<Line::point1=" + point1.toString() + ",point2=" + point2.toString() + "::Line>";
     }
 }
