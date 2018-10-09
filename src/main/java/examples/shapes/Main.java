@@ -7,7 +7,7 @@ public class Main {
         System.out.println("Hello shapes");
         try{
             Point p1 = new Point(1.1, 2.2);
-            Stream s1 =p1.serialize();
+            Stream s1 = p1.serialize();
             Point p2 = (Point)p1.deserialize(s1);
             System.out.println("Deserialized point =>" + p2.toString());
         }catch(ShapeException e){

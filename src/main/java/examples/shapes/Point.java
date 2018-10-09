@@ -95,11 +95,11 @@ public class Point implements Shape{
 
     @Override
     public Stream serialize() {
-        //<Point::x=123:y=456>
+        //<Point::x=123,y=456::Point>
         //<Circle::radius=1234:center=<Point::x=123:y=456>
 
-       // String obj = "<Point::x="+ this.getX() + ",y=" + this.getY() + "::Point>";
-        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
+       //String obj = "<Point::x="+ this.getX() + ",y=" + this.getY() + "::Point>";
+       return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
     }
 
     @Override
@@ -112,11 +112,11 @@ public class Point implements Shape{
         //tokenize the string to it's parts so that we can build a Point object
         int startXIndex = string.indexOf("<Point::x=") + 10;
         int endXIndex = string.indexOf(",y=");
-        Double x = Double.parseDouble(string.substring(startXIndex, endXIndex));
+        double x = Double.parseDouble(string.substring(startXIndex, endXIndex));
 
         int startYIndex = string.indexOf(",y=") + 3;
         int endYIndex = string.indexOf("::Point>");
-        Double y = Double.parseDouble(string.substring(startYIndex, endYIndex));
+        double y = Double.parseDouble(string.substring(startYIndex, endYIndex));
 
         return new Point(x, y);
     }
