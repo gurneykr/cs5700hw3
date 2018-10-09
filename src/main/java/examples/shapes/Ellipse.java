@@ -1,5 +1,8 @@
 package examples.shapes;
 import java.lang.Math;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Ellipse implements Shape{
@@ -19,16 +22,6 @@ public class Ellipse implements Shape{
         this.a = a;
         this.b = b;
 
-    }
-
-    @Override
-    public Stream serialize() {
-        return null;
-    }
-
-   // @Override
-    public Shape deserialize(Stream stream) throws ShapeException{
-        return null;
     }
 
     public Point getCenter()throws ShapeException{
@@ -55,5 +48,36 @@ public class Ellipse implements Shape{
         center.moveY(y);
     }
 
+    @Override
+    public Stream serialize() {
+        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
+    }
 
+    // @Override
+    public static Ellipse deserialize(Stream stream) throws ShapeException{
+        Ellipse ellipse = null;
+        String string = (String)stream.collect(Collectors.joining(""));
+
+        String regX = "<Ellipse::center=(\\S+),a=(\\S+),b=(\\S+)::Ellipse>";
+        Pattern p = Pattern.compile(regX);
+        Matcher m = p.matcher(string);
+        if(m.find()){
+            String centerString = m.group(1);
+            Stream streamCenter = centerString.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point center = Point.deserialize(streamCenter);
+
+            String a = m.group(2);
+
+            String b = m.group(3);
+
+            ellipse = new Ellipse(center, Double.parseDouble(a),Double.parseDouble(b));
+        }
+        return ellipse;
+    }
+
+    @Override
+    public String toString() {
+        return "<Ellipse::center=" + center.toString() + ",a=" +  a
+                + ",b=" + b + "::Ellipse>";
+    }
 }

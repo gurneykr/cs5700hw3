@@ -34,18 +34,35 @@ public class Main {
 //        }
 //    }
 
+//    public static void main(String args[]){
+//        System.out.println("Hello lines");
+//        try{
+//            Point point1 = new Point(0, 1);
+//            Point point2 = new Point(1, 1);
+//
+//            Line line = new Line(point1, point2);
+//
+//            Stream s1 = line.serialize();
+//            Line p2 = Line.deserialize(s1);
+//            System.out.println("Deserialized line =>" + p2.toString());
+//        }catch(ShapeException e){
+//            e.printStackTrace();
+//        }
+//    }
+
+//
+
     public static void main(String args[]){
-        System.out.println("Hello lines");
+        System.out.println("Hello Ellipse");
         try{
-            Point point1 = new Point(0, 1);
-            Point point2 = new Point(1, 1);
+            Point center = new Point(0, 1);
+            double a = 5;
+            double b = 3;
+            Ellipse ellipse = new Ellipse(center, a, b);
 
-
-            Line line = new Line(point1, point2);
-
-            Stream s1 = line.serialize();
-            Line p2 = Line.deserialize(s1);
-            System.out.println("Deserialized line =>" + p2.toString());
+            Stream s1 = ellipse.serialize();
+            Ellipse p2 = Ellipse.deserialize(s1);
+            System.out.println("Deserialized Ellipse =>" + p2.toString());
         }catch(ShapeException e){
             e.printStackTrace();
         }

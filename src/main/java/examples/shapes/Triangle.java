@@ -1,5 +1,8 @@
 package examples.shapes;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Triangle implements Shape{
@@ -17,16 +20,6 @@ public class Triangle implements Shape{
             //if there's ever a triangle with 0 area it's not valid, points are on the same line
             throw new ShapeException("Invalid triangle");
         }
-    }
-
-    @Override
-    public Stream serialize() {
-        return null;
-    }
-
-    //@Override
-    public Shape deserialize(Stream stream) throws ShapeException{
-        return null;
     }
 
     public Point getA(){
@@ -86,4 +79,39 @@ public class Triangle implements Shape{
         c.moveY(y);
     }
 
+    @Override
+    public Stream serialize() {
+        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
+    }
+
+    //@Override
+    public static Triangle deserialize(Stream stream) throws ShapeException{
+        Triangle triangle = null;
+        String string = (String)stream.collect(Collectors.joining(""));
+
+        String regX = "<Triangle::a=(\\S+),b=(\\S+),c=(\\S+)::Triangle>";
+        Pattern p = Pattern.compile(regX);
+        Matcher m = p.matcher(string);
+        if(m.find()){
+            String stringA = m.group(1);
+            Stream streamA = stringA.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point a = Point.deserialize(streamA);
+
+            String stringB = m.group(2);
+            Stream streamB = stringB.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point b = Point.deserialize(streamB);
+
+            String stringC = m.group(3);
+            Stream streamC = stringC.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point c = Point.deserialize(streamC);
+
+            triangle = new Triangle(a, b,c);
+        }
+        return triangle;
+    }
+    @Override
+    public String toString() {
+        return "<Triangle::a=" + a.toString() + ",b=" +  b.toString()
+                + ",c=" + c.toString() + "::Triangle>";
+    }
 }
