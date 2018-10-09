@@ -52,17 +52,32 @@ public class Main {
 
 //
 
+//    public static void main(String args[]){
+//        System.out.println("Hello Ellipse");
+//        try{
+//            Point center = new Point(0, 1);
+//            double a = 5;
+//            double b = 3;
+//            Ellipse ellipse = new Ellipse(center, a, b);
+//
+//            Stream s1 = ellipse.serialize();
+//            Ellipse p2 = Ellipse.deserialize(s1);
+//            System.out.println("Deserialized Ellipse =>" + p2.toString());
+//        }catch(ShapeException e){
+//            e.printStackTrace();
+//        }
+//    }
+
     public static void main(String args[]){
-        System.out.println("Hello Ellipse");
+        System.out.println("Hello Circle");
         try{
             Point center = new Point(0, 1);
-            double a = 5;
-            double b = 3;
-            Ellipse ellipse = new Ellipse(center, a, b);
+            double radius = 5;
+            Circle circle = new Circle(center, radius);
 
-            Stream s1 = ellipse.serialize();
-            Ellipse p2 = Ellipse.deserialize(s1);
-            System.out.println("Deserialized Ellipse =>" + p2.toString());
+            Stream s1 = circle.serialize();
+            Circle p2 = Circle.deserialize(s1);
+            System.out.println("Deserialized Circle =>" + p2.toString());
         }catch(ShapeException e){
             e.printStackTrace();
         }

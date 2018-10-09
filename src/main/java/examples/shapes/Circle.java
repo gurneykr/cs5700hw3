@@ -1,5 +1,8 @@
 package examples.shapes;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -43,16 +46,6 @@ public class Circle implements Shape{
         this.radius = radius;
     }
 
-    @Override
-    public Stream serialize() {
-        return null;
-    }
-
-    //@Override
-    public Shape deserialize(Stream stream)throws ShapeException {
-        return null;
-    }
-
     /**
      * @return  The center of the circle
      */
@@ -93,4 +86,34 @@ public class Circle implements Shape{
         return Math.PI * Math.pow(radius, 2);
     }
 
+    @Override
+    public Stream serialize() {
+        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
+    }
+
+    //@Override
+    public static Circle deserialize(Stream stream)throws ShapeException {
+        Circle circle = null;
+        String string = (String)stream.collect(Collectors.joining(""));
+
+        String regX = "<Circle::center=(\\S+),radius=(\\S+)::Circle>";
+        Pattern p = Pattern.compile(regX);
+        Matcher m = p.matcher(string);
+        if(m.find()){
+            String centerString = m.group(1);
+            Stream streamCenter = centerString.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point center = Point.deserialize(streamCenter);
+
+            String radius = m.group(2);
+
+
+            circle = new Circle(center, Double.parseDouble(radius));
+        }
+        return circle;
+    }
+
+    @Override
+    public String toString() {
+        return "<Circle::center=" + center.toString() + ",radius=" +  radius + "::Circle>";
+    }
 }
