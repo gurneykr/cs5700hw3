@@ -1,5 +1,8 @@
 package examples.shapes;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Rectangle implements Shape{
@@ -19,15 +22,6 @@ public class Rectangle implements Shape{
 
     }
 
-    @Override
-    public Stream serialize() {
-        return null;
-    }
-
-    @Override
-    public Shape deserialize(Stream stream) throws ShapeException{
-        return null;
-    }
 
     public Point getBottomLeft(){
         Point point = null;
@@ -100,5 +94,46 @@ public class Rectangle implements Shape{
         topRight.moveX(x);
         topRight.moveY(y);
 
+    }
+
+    @Override
+    public Stream serialize() {
+        //<Rectangle::bottomLeft=<Point::x=123,y=456::Point>,bottomRight=<Point::x=123,y=456::Point>,
+        // topLeft=<Point::x=123,y=456::Point>,topRight=<Point::x=123,y=456::Point>::Rectangle>
+        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
+    }
+
+    public static Rectangle deserialize(Stream stream) throws ShapeException{
+        Rectangle rectangle = null;
+        String string = (String)stream.collect(Collectors.joining(""));
+
+        String regX = "<Rectangle::bottomLeft=(\\S+),bottomRight=(\\S+),topLeft=(\\S+),topRight=(\\S+)::Rectangle>";
+        Pattern p = Pattern.compile(regX);
+        Matcher m = p.matcher(string);
+        if(m.find()){
+            String bottomLeft = m.group(1);
+            Stream streamBottomLeft = bottomLeft.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point bottomLeftPoint = Point.deserialize(streamBottomLeft);
+
+            String bottomRight = m.group(2);
+            Stream streamBottomRight = bottomRight.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point bottomRightPoint = Point.deserialize(streamBottomRight);
+
+            String topLeft = m.group(3);
+            Stream streamTopLeft = topLeft.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point topLeftPoint = Point.deserialize(streamTopLeft);
+
+            String topRight = m.group(4);
+            Stream streamTopRight = topRight.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point topRightPoint = Point.deserialize(streamTopRight);
+
+            rectangle = new Rectangle(bottomLeftPoint, bottomRightPoint,topLeftPoint,topRightPoint);
+        }
+        return rectangle;
+    }
+    @Override
+    public String toString() {
+        return "<Rectangle::bottomLeft=" + bottomLeft.toString() + ",bottomRight=" +  bottomRight.toString()
+                    + ",topLeft=" + topLeft.toString() + ",topRight=" + topRight.toString() + "::Rectangle>";
     }
 }

@@ -1,6 +1,8 @@
 package examples.shapes;
 
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -102,24 +104,41 @@ public class Point implements Shape{
        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
     }
 
-    @Override
-    public Shape deserialize(Stream stream) throws ShapeException{
-        //get the stream into a string
-        //parse it and create a shape object
+//    @Override
+//    public Shape deserialize(Stream stream) throws ShapeException{
+//        //get the stream into a string
+//        //parse it and create a shape object
+//        String string = (String)stream.collect(Collectors.joining(""));
+//        //System.out.println("deserialized Point is:" + string);
+//
+//        //tokenize the string to it's parts so that we can build a Point object
+//        int startXIndex = string.indexOf("<Point::x=") + 10;
+//        int endXIndex = string.indexOf(",y=");
+//        double x = Double.parseDouble(string.substring(startXIndex, endXIndex));
+//
+//        int startYIndex = string.indexOf(",y=") + 3;
+//        int endYIndex = string.indexOf("::Point>");
+//        double y = Double.parseDouble(string.substring(startYIndex, endYIndex));
+//
+//        return new Point(x, y);
+//    }
+
+
+    public static Point deserialize(Stream stream) throws ShapeException{
+        Point point = null;
         String string = (String)stream.collect(Collectors.joining(""));
-        //System.out.println("deserialized Point is:" + string);
 
-        //tokenize the string to it's parts so that we can build a Point object
-        int startXIndex = string.indexOf("<Point::x=") + 10;
-        int endXIndex = string.indexOf(",y=");
-        double x = Double.parseDouble(string.substring(startXIndex, endXIndex));
-
-        int startYIndex = string.indexOf(",y=") + 3;
-        int endYIndex = string.indexOf("::Point>");
-        double y = Double.parseDouble(string.substring(startYIndex, endYIndex));
-
-        return new Point(x, y);
+        String regX = "<Point::x=(\\d+.\\d+),y=(\\d+.\\d+)::Point>";
+        Pattern p = Pattern.compile(regX);
+        Matcher m = p.matcher(string);
+        if(m.find()){
+            String xString = m.group(1);
+            String yString = m.group(2);
+            point = new Point(Double.parseDouble(xString), Double.parseDouble(yString));
+        }
+        return point;
     }
+
 
     @Override
     public String toString() {

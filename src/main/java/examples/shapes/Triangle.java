@@ -24,7 +24,7 @@ public class Triangle implements Shape{
         return null;
     }
 
-    @Override
+    //@Override
     public Shape deserialize(Stream stream) throws ShapeException{
         return null;
     }
