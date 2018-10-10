@@ -1,0 +1,5 @@
+<Circle::center=<Point::x=0.0,y=1.0::Point>,radius=5.0::Circle>
+<Triangle::a=<Point::x=0.0,y=0.0::Point>,b=<Point::x=1.0,y=0.0::Point>,c=<Point::x=0.0,y=1.0::Point>::Triangle>
+<Rectangle::bottomLeft=<Point::x=0.0,y=0.0::Point>,bottomRight=<Point::x=1.0,y=0.0::Point>,topLeft=<Point::x=0.0,y=1.0::Point>,topRight=<Point::x=1.0,y=1.0::Point>::Rectangle>
+<Ellipse::center=<Point::x=0.0,y=1.0::Point>,a=5.0,b=3.0::Ellipse>
+<Line::point1=<Point::x=0.0,y=1.0::Point>,point2=<Point::x=1.0,y=1.0::Point>::Line>
