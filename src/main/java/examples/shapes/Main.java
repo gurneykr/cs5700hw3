@@ -73,7 +73,6 @@ public class Main {
 //    }
 
     public static void main(String args[]){
-        System.out.println("Hello Circle");
         List<Shape> shapeList = new ArrayList();
 
         try {
@@ -117,7 +116,11 @@ public class Main {
                 e.printStackTrace();
         }
         writeShapesToFile(shapeList,"test.txt");
-        readFromFile("test.txt");
+        List<Shape> shapes = readFromFile("test.txt");
+        for(Shape s: shapes){
+            System.out.println(s);
+        }
+
     }
 
     public static void writeShapesToFile(List<Shape> shapeList, String fileName){
@@ -157,13 +160,13 @@ public class Main {
     }
 
     public static List<Shape> readFromFile(String fileName){
+        List<Shape> shapeList = new ArrayList();
         try {
-
             BufferedReader br = new BufferedReader(new FileReader(fileName));
 
             String stringShape;
             while ((stringShape = br.readLine()) != null)
-                System.out.println(stringShape);
+                shapeList.add(ShapeFactory.createShape(stringShape));
 
         }catch (FileNotFoundException e){
             System.out.println("File not found");
@@ -171,6 +174,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        return null;
+        return shapeList;
     }
 }

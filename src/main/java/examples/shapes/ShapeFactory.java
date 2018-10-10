@@ -13,6 +13,8 @@ public class ShapeFactory {
                 shape = Line.deserialize(stream);
             }else if(shapeString.startsWith("<Rectangle::")){
                 shape = Rectangle.deserialize(stream);
+            }else if(shapeString.startsWith("<Square::")) {
+                shape = Square.deserialize(stream);
             }else if(shapeString.startsWith("<Circle::")){
                 shape = Circle.deserialize(stream);
             }else if(shapeString.startsWith("<Ellipse::")){
