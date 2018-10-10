@@ -8,4 +8,14 @@ public class Square extends Rectangle{
         super(bottomLeft, bottomRight,topLeft, topRight );
         Validator.validateEqualSides(bottomLeft, bottomRight,topLeft, topRight);
     }
+
+    public static Rectangle deserialize(Stream stream) throws ShapeException{
+        return deserialize(stream,"Square");
+    }
+
+    @Override
+    public String toString() {
+        return "<Square::bottomLeft=" + bottomLeft.toString() + ",bottomRight=" +  bottomRight.toString()
+                + ",topLeft=" + topLeft.toString() + ",topRight=" + topRight.toString() + "::Square>";
+    }
 }

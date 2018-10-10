@@ -95,6 +95,13 @@ public class Main {
             Rectangle rectangle = new Rectangle(bottomLeft, bottomRight, topLeft, topRight);
             shapeList.add(rectangle);
 
+            Point topLeft2 = new Point(0, 1);
+            Point topRight2 = new Point(1, 1);
+            Point bottomLeft2 = new Point(0, 0);
+            Point bottomRight2 = new Point(1, 0);
+            Square square = new Square(bottomLeft2, bottomRight2, topLeft2, topRight2);
+            shapeList.add(square);
+
             Point center2 = new Point(0, 1);
             double a2 = 5;
             double b2 = 3;

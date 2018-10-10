@@ -104,10 +104,14 @@ public class Rectangle implements Shape{
     }
 
     public static Rectangle deserialize(Stream stream) throws ShapeException{
+        return deserialize(stream,"Rectangle");
+    }
+
+    protected static Rectangle deserialize(Stream stream, String shapeType) throws ShapeException{
         Rectangle rectangle = null;
         String string = (String)stream.collect(Collectors.joining(""));
 
-        String regX = "<Rectangle::bottomLeft=(\\S+),bottomRight=(\\S+),topLeft=(\\S+),topRight=(\\S+)::Rectangle>";
+        String regX = "<" + shapeType + "::bottomLeft=(\\S+),bottomRight=(\\S+),topLeft=(\\S+),topRight=(\\S+)::" + shapeType + ">";
         Pattern p = Pattern.compile(regX);
         Matcher m = p.matcher(string);
         if(m.find()){
