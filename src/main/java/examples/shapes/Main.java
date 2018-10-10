@@ -154,9 +154,9 @@ public class Main {
 
             BufferedReader br = new BufferedReader(new FileReader(fileName));
 
-            String st;
-            while ((st = br.readLine()) != null)
-                System.out.println(st);
+            String stringShape;
+            while ((stringShape = br.readLine()) != null)
+                System.out.println(stringShape);
 
         }catch (FileNotFoundException e){
             System.out.println("File not found");
