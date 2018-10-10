@@ -110,6 +110,7 @@ public class Main {
                 e.printStackTrace();
         }
         writeShapesToFile(shapeList,"test.txt");
+        readFromFile("test.txt");
     }
 
     public static void writeShapesToFile(List<Shape> shapeList, String fileName){
@@ -148,4 +149,21 @@ public class Main {
         }
     }
 
+    public static List<Shape> readFromFile(String fileName){
+        try {
+
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+            String st;
+            while ((st = br.readLine()) != null)
+                System.out.println(st);
+
+        }catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
