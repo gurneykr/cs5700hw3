@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  *
  */
 @SuppressWarnings("WeakerAccess")
-public class Line implements Shape{
+public class Line extends BaseShape{
     private Point point1;
     private Point point2;
 

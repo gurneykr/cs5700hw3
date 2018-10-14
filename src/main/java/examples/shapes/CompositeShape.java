@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class CompositeShape implements Shape {
+public class CompositeShape extends BaseShape {
     private List<Shape> shapeList = new ArrayList();
 
     public void addShape(Shape shape){

@@ -12,7 +12,7 @@ import java.util.stream.Stream;
  *
  */
 @SuppressWarnings("WeakerAccess")
-public class Circle implements Shape{
+public class Circle extends BaseShape{
     private Point center;
     private double radius;
 

@@ -12,7 +12,7 @@ import java.util.stream.Stream;
  * This class represents point objects that can be moved and copied
  */
 @SuppressWarnings("WeakerAccess")
-public class Point implements Shape{
+public class Point extends BaseShape{
     private double x;
     private double y;
 

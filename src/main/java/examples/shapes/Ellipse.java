@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Ellipse implements Shape{
+public class Ellipse extends BaseShape{
 
     private Point center;
     private double a;

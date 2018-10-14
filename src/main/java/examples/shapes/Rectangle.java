@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Rectangle implements Shape{
+public class Rectangle extends BaseShape{
     protected Point bottomLeft;
     protected Point bottomRight;
     protected Point topLeft;

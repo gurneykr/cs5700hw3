@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Triangle implements Shape{
+public class Triangle extends BaseShape{
     private Point a = new Point(1,1);
     private Point b = new Point(2,3);
     private Point c = new Point(3,1);
