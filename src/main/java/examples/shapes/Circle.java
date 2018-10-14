@@ -1,5 +1,6 @@
 package examples.shapes;
 
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -115,5 +116,42 @@ public class Circle extends BaseShape{
     @Override
     public String toString() {
         return "<Circle::center=" + center.toString() + ",radius=" +  radius + "::Circle>";
+    }
+
+//    public String toSVG(int width, int height){
+////        <svg width="100" height="100">
+////  <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+////</svg>
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("<svg width=").append("\"").append(width).append("\"").append(" height=").append("\"").append(height).append("\"").append(">")
+//                .append("<circle cx=").append("\"").append(cx).append("\"").append(" cy=").append("\"").append(cy).append("\"")
+//                .append(" r=").append("\"").append(radius).append("\"")
+//                .append(" stroke=").append("\"").append(lineColor).append("\"").append(" stroke-width=")
+//                .append("\"").append(lineWidth).append("\"").append(" fill=").append("\"").append(fillColor).append("\"").append(" />")
+//        .append("</svg");
+//
+//        return sb.toString();
+//    }
+
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException{
+        // Shift the shape by the specified rendering offset
+        //move(-xOffset, -yOffset);
+
+        // Compute the left side of the bounding box
+        int x = (int) Math.round(center.getX() - getRadius());
+
+        // Compute the top side of the bounding box
+        int y = (int) Math.round(center.getY() - getRadius());
+
+        // Compute the width of the bounding box
+        int width = (int) Math.round(getRadius()*2);
+
+        // Draw the circle by drawing an oval in a square bounding box
+        graphics.setColor(Color.GREEN);
+        graphics.fillOval(x, y, width, width);
+        graphics.drawOval(x, y, width, width);
+
+        // Shift the shape back to its original location
+        move(xOffset, yOffset);
     }
 }

@@ -1,5 +1,6 @@
 package examples.shapes;
 
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -48,6 +49,11 @@ public class Line extends BaseShape{
 
         if (computeLength() < 0.00000001)
             throw new ShapeException("A line must have a length > 0");
+    }
+
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+
     }
 
     /**

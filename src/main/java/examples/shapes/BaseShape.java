@@ -8,9 +8,27 @@ public abstract class BaseShape implements Shape{
 //    Sorry, your browser does not support inline SVG.
 //</svg>
 
-    protected String lineColor = "Black";
-    protected int lineWidth = 1;
-    protected String fillColor = "White";
+    protected String lineColor = "black";
+    protected double lineWidth = 1;
+    protected String fillColor = "white";
+    protected double cx = 0;
+    protected double cy = 0;
+
+    public double getCx() {
+        return cx;
+    }
+
+    public void setCx(double cx) {
+        this.cx = cx;
+    }
+
+    public double getCy() {
+        return cy;
+    }
+
+    public void setCy(double cy) {
+        this.cy = cy;
+    }
 
     public String getLineColor() {
         return lineColor;
@@ -20,11 +38,11 @@ public abstract class BaseShape implements Shape{
         this.lineColor = lineColor;
     }
 
-    public int getLineWidth() {
+    public double getLineWidth() {
         return lineWidth;
     }
 
-    public void setLineWidth(int lineWidth) {
+    public void setLineWidth(double lineWidth) {
         this.lineWidth = lineWidth;
     }
 
@@ -35,4 +53,6 @@ public abstract class BaseShape implements Shape{
     public void setFillColor(String fillColor) {
         this.fillColor = fillColor;
     }
+
+
 }

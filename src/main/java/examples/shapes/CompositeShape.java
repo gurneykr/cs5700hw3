@@ -1,5 +1,6 @@
 package examples.shapes;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -15,6 +16,10 @@ public class CompositeShape extends BaseShape {
     }
     public void removeAllShape(){
         shapeList.clear();
+    }
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+
     }
 
     @Override

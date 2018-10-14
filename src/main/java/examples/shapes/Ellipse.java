@@ -1,4 +1,5 @@
 package examples.shapes;
+import java.awt.*;
 import java.lang.Math;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +22,11 @@ public class Ellipse extends BaseShape{
         this.center = center.copy();
         this.a = a;
         this.b = b;
+
+    }
+
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
 
     }
 

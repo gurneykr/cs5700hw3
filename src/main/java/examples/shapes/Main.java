@@ -1,5 +1,8 @@
 package examples.shapes;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +83,8 @@ public class Main {
             double radius = 5;
             Circle circle = new Circle(center, radius);
             shapeList.add(circle);
+            //System.out.println(circle.toSVG(5,5));
+            //circle.render();
 
             Point a = new Point(0, 0);
             Point b = new Point(1, 0);
@@ -112,11 +117,18 @@ public class Main {
             Line line = new Line(point1, point2);
             shapeList.add(line);
 
+            testRender();
+
         }catch(ShapeException e){
                 e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
         }
         writeShapesToFile(shapeList,"test.txt");
+
         List<Shape> shapes = readFromFile("test.txt");
+
+
         for(Shape s: shapes){
             System.out.println(s);
         }
@@ -175,5 +187,40 @@ public class Main {
         }
 
         return shapeList;
+    }
+
+    public static void testRender() throws ShapeException, IOException {
+        //Setup
+        //CompositeShape composite = new CompositeShape();
+        //composite.addChildShape(new EmbeddedPicture(44, 55, 80,50, "graphics/dog.jpg"));
+        Circle circle = new  Circle( 30, 30, 20);
+//        Point topLeft = new Point(0, 10);
+//        Point topRight = new Point(10, 10);
+//        Point bottomLeft = new Point(0, 10);
+//        Point bottomRight = new Point(10, 0);
+//        Rectangle rectangle = new Rectangle(bottomLeft, bottomRight, topLeft, topRight);
+
+
+        //composite.addShape(rectangle);
+        //composite.addShape(new Circle(40,50,30));
+        //composite.addShape(new Triangle(10, 10, 80, 60));
+
+        BufferedImage bImg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics = bImg.createGraphics();
+        graphics.setColor(Color.WHITE);
+        graphics.fillRect(0, 0, 100, 100);
+        graphics.setColor(Color.GREEN);
+
+        circle.render(graphics, 0,0 );
+        // Stimulus
+        //composite.render(graphics,0, 0);
+
+        // Write to a file so the results can be compared manually
+        ImageIO.write(bImg, "png", new File("composite.png"));
+
+        // There should be a dog in the bottom right corner, partially hanging off
+        // the bottom and the right.  A circle the up and to the left of his head.
+        // A rectangle up and to the left of the circle.  An a large isosceles
+        // triangle centered horizontally and overlapping the circle and rectangle.
     }
 }

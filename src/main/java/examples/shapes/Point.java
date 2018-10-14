@@ -1,5 +1,6 @@
 package examples.shapes;
 
+import java.awt.*;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +16,11 @@ import java.util.stream.Stream;
 public class Point extends BaseShape{
     private double x;
     private double y;
+
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+
+    }
 
     @Override
     public boolean equals(Object o) {

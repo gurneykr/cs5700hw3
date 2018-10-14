@@ -1,5 +1,6 @@
 package examples.shapes;
 
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -10,6 +11,11 @@ public class Rectangle extends BaseShape{
     protected Point bottomRight;
     protected Point topLeft;
     protected Point topRight;
+
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+
+    }
 
     public Rectangle(Point bottomLeft, Point bottomRight, Point topLeft, Point topRight) throws ShapeException{
 

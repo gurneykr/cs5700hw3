@@ -1,5 +1,6 @@
 package examples.shapes;
 
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -20,6 +21,11 @@ public class Triangle extends BaseShape{
             //if there's ever a triangle with 0 area it's not valid, points are on the same line
             throw new ShapeException("Invalid triangle");
         }
+    }
+
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+
     }
 
     public Point getA(){
