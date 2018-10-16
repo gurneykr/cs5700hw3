@@ -152,6 +152,6 @@ public class Circle extends BaseShape{
         graphics.drawOval(x, y, width, width);
 
         // Shift the shape back to its original location
-        move(xOffset, yOffset);
+        //move(xOffset, yOffset);
     }
 }

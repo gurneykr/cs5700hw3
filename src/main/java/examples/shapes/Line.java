@@ -51,10 +51,6 @@ public class Line extends BaseShape{
             throw new ShapeException("A line must have a length > 0");
     }
 
-    @Override
-    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
-
-    }
 
     /**
      * @return  The first point
@@ -124,5 +120,10 @@ public class Line extends BaseShape{
     @Override
     public String toString() {
         return "<Line::point1=" + point1.toString() + ",point2=" + point2.toString() + "::Line>";
+    }
+
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+        graphics.drawLine( (int)getPoint1().getX(), (int)getPoint1().getY(), (int)getPoint2().getX(), (int)getPoint2().getY());
     }
 }

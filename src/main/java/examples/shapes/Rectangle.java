@@ -12,10 +12,6 @@ public class Rectangle extends BaseShape{
     protected Point topLeft;
     protected Point topRight;
 
-    @Override
-    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
-
-    }
 
     public Rectangle(Point bottomLeft, Point bottomRight, Point topLeft, Point topRight) throws ShapeException{
 
@@ -145,5 +141,12 @@ public class Rectangle extends BaseShape{
     public String toString() {
         return "<Rectangle::bottomLeft=" + bottomLeft.toString() + ",bottomRight=" +  bottomRight.toString()
                     + ",topLeft=" + topLeft.toString() + ",topRight=" + topRight.toString() + "::Rectangle>";
+    }
+
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+        graphics.setColor(Color.GREEN);
+        graphics.fillRect( (int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
+        graphics.drawRect((int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
     }
 }

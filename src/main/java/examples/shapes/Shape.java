@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.stream.Stream;
 
 public interface Shape {
-    public abstract  Stream serialize();
+    Stream serialize();
  //   public abstract Shape deserialize(Stream stream) throws ShapeException;
-    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException;
+    void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException;
 }

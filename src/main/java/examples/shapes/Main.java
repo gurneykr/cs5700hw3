@@ -200,18 +200,46 @@ public class Main {
 //        Point bottomRight = new Point(10, 0);
 //        Rectangle rectangle = new Rectangle(bottomLeft, bottomRight, topLeft, topRight);
 
+//        Point center2 = new Point(10, 10);
+//        double a2 = 20;
+//        double b2 = 9;
+//        Ellipse ellipse = new Ellipse(center2, a2, b2);
 
-        //composite.addShape(rectangle);
-        //composite.addShape(new Circle(40,50,30));
-        //composite.addShape(new Triangle(10, 10, 80, 60));
+
+        Point topLeft = new Point(10, 20);
+        Point topRight = new Point(20, 20);
+        Point bottomLeft = new Point(10, 10);
+        Point bottomRight = new Point(20, 10);
+        Rectangle rectangle = new Rectangle(bottomLeft, bottomRight, topLeft, topRight);
+
+        Point a = new Point(0, 0);
+        Point b = new Point(10, 0);
+        Point c = new Point(0, 10);
+        Triangle triangle = new Triangle(a, b, c);
+
+        Point point1 = new Point(0, 30);
+        Point point2 = new Point(30, 30);
+
+        Line line = new Line(point1, point2);
+
+        CompositeShape compositeShape = new CompositeShape();
+
+        compositeShape.addShape(rectangle);
+        compositeShape.addShape(circle);
+        compositeShape.addShape(triangle);
+        compositeShape.addShape(line);
+
+
 
         BufferedImage bImg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bImg.createGraphics();
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0, 0, 100, 100);
         graphics.setColor(Color.GREEN);
+        compositeShape.render(graphics, 0, 0);
 
-        circle.render(graphics, 0,0 );
+        //line.render(graphics, 0, 0);
+        //ellipse.render(graphics, 0,0 );
         // Stimulus
         //composite.render(graphics,0, 0);
 

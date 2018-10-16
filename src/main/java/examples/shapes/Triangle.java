@@ -23,11 +23,6 @@ public class Triangle extends BaseShape{
         }
     }
 
-    @Override
-    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
-
-    }
-
     public Point getA(){
         Point point = null;
         try {
@@ -119,5 +114,19 @@ public class Triangle extends BaseShape{
     public String toString() {
         return "<Triangle::a=" + a.toString() + ",b=" +  b.toString()
                 + ",c=" + c.toString() + "::Triangle>";
+    }
+
+
+    @Override
+    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+        graphics.setColor(Color.GREEN);
+        //graphics.fillRect( (int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
+        //graphics.drawRect((int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
+        //int aPoint[] = getA();
+        int xPoints[] = {(int)a.getX() ,(int)b.getX(), (int)c.getX()  };
+        int yPoints[] = {(int)a.getY() ,(int)b.getY(), (int)c.getY()  };
+
+        graphics.fillPolygon(xPoints, yPoints, 3);
+        graphics.drawPolygon(xPoints, yPoints, 3);
     }
 }
