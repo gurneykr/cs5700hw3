@@ -120,36 +120,4 @@ public class Circle extends Ellipse{
         return "<Circle::center=" + center.toString() + ",radius=" +  radius + "::Circle>";
     }
 
-//    public void render(Graphics2D graphics) throws ShapeException{
-//        graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
-//
-//        // Compute the left side of the bounding box
-//        int x = (int) Math.round(center.getX() - getRadius());
-//
-//        // Compute the top side of the bounding box
-//        int y = (int) Math.round(center.getY() - getRadius());
-//
-//        // Compute the width of the bounding box
-//        int width = (int) Math.round(getRadius()*2);
-//
-//        // Draw the circle by drawing an oval in a square bounding box
-//        if(renderDetails != null){
-//            graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
-//
-//            graphics.setColor(renderDetails.getLineColor());
-//            graphics.drawOval(0,0, width, width);
-//            if(renderDetails.getFillColor() != null) {//make sure there is a fill color
-//                graphics.setColor(renderDetails.getFillColor());
-//                graphics.fillOval(0,0, width, width);
-//            }
-//
-//            graphics.translate(-renderDetails.getxPosition(),-renderDetails.getyPosition());
-//        }else{
-//            graphics.translate(x, y);
-//            graphics.setColor(Color.white);//default
-//            graphics.drawOval( x, y, width, width);
-//
-//            graphics.translate(-x, -y);
-//        }
-//    }
 }

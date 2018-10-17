@@ -82,28 +82,6 @@ public class Ellipse extends BaseShape{
                 + ",b=" + b + "::Ellipse>";
     }
 
-    public void renderOrig(Graphics2D graphics) throws ShapeException{
-        // Shift the shape by the specified rendering offset
-        //move(-xOffset, -yOffset);
-
-        // Compute the left side of the bounding box
-        //int x = (int) Math.round(center.getX() - getRadius());
-
-        // Compute the top side of the bounding box
-        //int y = (int) Math.round(center.getY() - getRadius());
-
-        // Compute the width of the bounding box
-        //int width = (int) Math.round(getRadius()*2);
-
-        // Draw the circle by drawing an oval in a square bounding box
-        graphics.setColor(Color.GREEN);
-        graphics.fillOval((int)center.getX(), (int)center.getY(), (int)(2*a), (int)(2*b));
-        graphics.drawOval((int)center.getX(), (int)center.getY(), (int)(2*a), (int)(2*b));
-
-        // Shift the shape back to its original location
-        //move(xOffset, yOffset);
-    }
-
     public void render(Graphics2D graphics) throws ShapeException{
         graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
 

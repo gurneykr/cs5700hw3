@@ -239,8 +239,8 @@ public class Main {
         RenderDetails renderDetails = new RenderDetails();
         renderDetails.setLineColor(Color.BLUE);
         renderDetails.setFillColor(Color.GREEN);
-        circle.setRenderDetails(renderDetails);
-        circle.render(graphics);
+        triangle.setRenderDetails(renderDetails);
+        triangle.render(graphics);
 
         //compositeShape.render(graphics);
 

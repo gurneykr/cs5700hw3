@@ -116,17 +116,38 @@ public class Triangle extends BaseShape{
                 + ",c=" + c.toString() + "::Triangle>";
     }
 
-
     @Override
-    public void render(Graphics2D graphics) throws ShapeException {
-        graphics.setColor(Color.GREEN);
-        //graphics.fillRect( (int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
-        //graphics.drawRect((int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
-        //int aPoint[] = getA();
+    public void render(Graphics2D graphics) throws ShapeException{
+        graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
+
+        // Compute the left side of the bounding box
+        int x = (int)a.getX();
+
+        // Compute the top side of the bounding box
+        int y = (int)a.getY();
+
         int xPoints[] = {(int)a.getX() ,(int)b.getX(), (int)c.getX()  };
         int yPoints[] = {(int)a.getY() ,(int)b.getY(), (int)c.getY()  };
 
-        graphics.fillPolygon(xPoints, yPoints, 3);
-        graphics.drawPolygon(xPoints, yPoints, 3);
+        // Draw the circle by drawing an oval in a square bounding box
+        if(renderDetails != null){
+            graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
+
+            graphics.setColor(renderDetails.getLineColor());
+            graphics.drawPolygon(xPoints, yPoints, 3);
+            if(renderDetails.getFillColor() != null) {//make sure there is a fill color
+                graphics.setColor(renderDetails.getFillColor());
+                graphics.fillPolygon(xPoints, yPoints, 3);
+            }
+
+            graphics.translate(-renderDetails.getxPosition(),-renderDetails.getyPosition());
+        }else{
+            graphics.translate(x, y);
+
+            graphics.setColor(Color.white);//default
+            graphics.drawPolygon(xPoints, yPoints, 3);
+
+            graphics.translate(-x, -y);
+        }
     }
 }
