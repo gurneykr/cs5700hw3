@@ -18,9 +18,9 @@ public class CompositeShape extends BaseShape {
         shapeList.clear();
     }
     @Override
-    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+    public void render(Graphics graphics) throws ShapeException {
         for(Shape s: shapeList){
-            s.render(graphics, xOffset, yOffset);
+            s.render(graphics);
         }
     }
 

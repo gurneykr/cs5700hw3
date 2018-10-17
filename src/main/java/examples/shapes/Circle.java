@@ -118,22 +118,7 @@ public class Circle extends BaseShape{
         return "<Circle::center=" + center.toString() + ",radius=" +  radius + "::Circle>";
     }
 
-//    public String toSVG(int width, int height){
-////        <svg width="100" height="100">
-////  <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-////</svg>
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("<svg width=").append("\"").append(width).append("\"").append(" height=").append("\"").append(height).append("\"").append(">")
-//                .append("<circle cx=").append("\"").append(cx).append("\"").append(" cy=").append("\"").append(cy).append("\"")
-//                .append(" r=").append("\"").append(radius).append("\"")
-//                .append(" stroke=").append("\"").append(lineColor).append("\"").append(" stroke-width=")
-//                .append("\"").append(lineWidth).append("\"").append(" fill=").append("\"").append(fillColor).append("\"").append(" />")
-//        .append("</svg");
-//
-//        return sb.toString();
-//    }
-
-    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException{
+    public void render(Graphics graphics) throws ShapeException{
         // Shift the shape by the specified rendering offset
         //move(-xOffset, -yOffset);
 
@@ -147,9 +132,19 @@ public class Circle extends BaseShape{
         int width = (int) Math.round(getRadius()*2);
 
         // Draw the circle by drawing an oval in a square bounding box
-        graphics.setColor(Color.GREEN);
-        graphics.fillOval(x, y, width, width);
-        graphics.drawOval(x, y, width, width);
+        if(renderDetails != null){
+            graphics.setColor(renderDetails.getLineColor());
+            graphics.drawOval(renderDetails.getxPosition(), renderDetails.getyPosition(), width, width);
+            if(renderDetails.getFillColor() != null) {//make sure there is a fill color
+                graphics.setColor(renderDetails.getFillColor());
+                graphics.fillOval(renderDetails.getxPosition(), renderDetails.getyPosition(), width, width);
+            }
+
+        }else{
+            graphics.setColor(Color.white);//default
+            graphics.drawOval( x, y, width, width);
+        }
+
 
         // Shift the shape back to its original location
         //move(xOffset, yOffset);

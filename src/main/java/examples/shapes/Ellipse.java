@@ -82,7 +82,7 @@ public class Ellipse extends BaseShape{
                 + ",b=" + b + "::Ellipse>";
     }
 
-    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException{
+    public void render(Graphics graphics) throws ShapeException{
         // Shift the shape by the specified rendering offset
         //move(-xOffset, -yOffset);
 

@@ -193,7 +193,7 @@ public class Main {
         //Setup
         //CompositeShape composite = new CompositeShape();
         //composite.addChildShape(new EmbeddedPicture(44, 55, 80,50, "graphics/dog.jpg"));
-        Circle circle = new  Circle( 30, 30, 20);
+
 //        Point topLeft = new Point(0, 10);
 //        Point topRight = new Point(10, 10);
 //        Point bottomLeft = new Point(0, 10);
@@ -204,6 +204,7 @@ public class Main {
 //        double a2 = 20;
 //        double b2 = 9;
 //        Ellipse ellipse = new Ellipse(center2, a2, b2);
+        Circle circle = new  Circle( 30, 30, 20);
 
 
         Point topLeft = new Point(10, 20);
@@ -233,10 +234,15 @@ public class Main {
 
         BufferedImage bImg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bImg.createGraphics();
-        graphics.setColor(Color.WHITE);
-        graphics.fillRect(0, 0, 100, 100);
-        graphics.setColor(Color.GREEN);
-        compositeShape.render(graphics, 0, 0);
+
+
+        RenderDetails renderDetails = new RenderDetails();
+        renderDetails.setLineColor(Color.BLUE);
+        renderDetails.setFillColor(Color.GREEN);
+        circle.setRenderDetails(renderDetails);
+        circle.render(graphics);
+
+        //compositeShape.render(graphics);
 
         //line.render(graphics, 0, 0);
         //ellipse.render(graphics, 0,0 );
@@ -246,9 +252,6 @@ public class Main {
         // Write to a file so the results can be compared manually
         ImageIO.write(bImg, "png", new File("composite.png"));
 
-        // There should be a dog in the bottom right corner, partially hanging off
-        // the bottom and the right.  A circle the up and to the left of his head.
-        // A rectangle up and to the left of the circle.  An a large isosceles
-        // triangle centered horizontally and overlapping the circle and rectangle.
+
     }
 }

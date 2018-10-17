@@ -95,7 +95,6 @@ public class Rectangle extends BaseShape{
 
         topRight.moveX(x);
         topRight.moveY(y);
-
     }
 
     @Override
@@ -144,7 +143,7 @@ public class Rectangle extends BaseShape{
     }
 
     @Override
-    public void render(Graphics graphics, int xOffset, int yOffset) throws ShapeException {
+    public void render(Graphics graphics) throws ShapeException {
         graphics.setColor(Color.GREEN);
         graphics.fillRect( (int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
         graphics.drawRect((int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
