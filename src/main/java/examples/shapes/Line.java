@@ -123,7 +123,7 @@ public class Line extends BaseShape{
     }
 
     @Override
-    public void render(Graphics graphics) throws ShapeException {
+    public void render(Graphics2D graphics) throws ShapeException {
         graphics.drawLine( (int)getPoint1().getX(), (int)getPoint1().getY(), (int)getPoint2().getX(), (int)getPoint2().getY());
     }
 }

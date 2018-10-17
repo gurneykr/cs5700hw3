@@ -18,7 +18,7 @@ public class Point extends BaseShape{
     private double y;
 
     @Override
-    public void render(Graphics graphics) throws ShapeException {
+    public void render(Graphics2D graphics) throws ShapeException {
 
     }
 

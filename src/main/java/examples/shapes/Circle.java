@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  *
  */
 @SuppressWarnings("WeakerAccess")
-public class Circle extends BaseShape{
+public class Circle extends Ellipse{
     private Point center;
     private double radius;
 
@@ -26,6 +26,7 @@ public class Circle extends BaseShape{
      * @throws ShapeException   The exception thrown if the x, y, or z are not valid
      */
     public Circle(double x, double y, double radius) throws ShapeException {
+        super(new Point(x,y), radius, radius);
         Validator.validatePositiveDouble(radius, "Invalid radius");
         center = new Point(x, y);
         this.radius = radius;
@@ -39,6 +40,7 @@ public class Circle extends BaseShape{
      * @throws ShapeException   The exception thrown if the x, y, or z are not valid
      */
     public Circle(Point center, double radius) throws ShapeException {
+        super(center, radius, radius);
         Validator.validatePositiveDouble(radius, "Invalid radius");
         if (center==null)
             throw new ShapeException("Invalid center point");
@@ -118,35 +120,36 @@ public class Circle extends BaseShape{
         return "<Circle::center=" + center.toString() + ",radius=" +  radius + "::Circle>";
     }
 
-    public void render(Graphics graphics) throws ShapeException{
-        // Shift the shape by the specified rendering offset
-        //move(-xOffset, -yOffset);
-
-        // Compute the left side of the bounding box
-        int x = (int) Math.round(center.getX() - getRadius());
-
-        // Compute the top side of the bounding box
-        int y = (int) Math.round(center.getY() - getRadius());
-
-        // Compute the width of the bounding box
-        int width = (int) Math.round(getRadius()*2);
-
-        // Draw the circle by drawing an oval in a square bounding box
-        if(renderDetails != null){
-            graphics.setColor(renderDetails.getLineColor());
-            graphics.drawOval(renderDetails.getxPosition(), renderDetails.getyPosition(), width, width);
-            if(renderDetails.getFillColor() != null) {//make sure there is a fill color
-                graphics.setColor(renderDetails.getFillColor());
-                graphics.fillOval(renderDetails.getxPosition(), renderDetails.getyPosition(), width, width);
-            }
-
-        }else{
-            graphics.setColor(Color.white);//default
-            graphics.drawOval( x, y, width, width);
-        }
-
-
-        // Shift the shape back to its original location
-        //move(xOffset, yOffset);
-    }
+//    public void render(Graphics2D graphics) throws ShapeException{
+//        graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
+//
+//        // Compute the left side of the bounding box
+//        int x = (int) Math.round(center.getX() - getRadius());
+//
+//        // Compute the top side of the bounding box
+//        int y = (int) Math.round(center.getY() - getRadius());
+//
+//        // Compute the width of the bounding box
+//        int width = (int) Math.round(getRadius()*2);
+//
+//        // Draw the circle by drawing an oval in a square bounding box
+//        if(renderDetails != null){
+//            graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
+//
+//            graphics.setColor(renderDetails.getLineColor());
+//            graphics.drawOval(0,0, width, width);
+//            if(renderDetails.getFillColor() != null) {//make sure there is a fill color
+//                graphics.setColor(renderDetails.getFillColor());
+//                graphics.fillOval(0,0, width, width);
+//            }
+//
+//            graphics.translate(-renderDetails.getxPosition(),-renderDetails.getyPosition());
+//        }else{
+//            graphics.translate(x, y);
+//            graphics.setColor(Color.white);//default
+//            graphics.drawOval( x, y, width, width);
+//
+//            graphics.translate(-x, -y);
+//        }
+//    }
 }

@@ -82,7 +82,7 @@ public class Ellipse extends BaseShape{
                 + ",b=" + b + "::Ellipse>";
     }
 
-    public void render(Graphics graphics) throws ShapeException{
+    public void renderOrig(Graphics2D graphics) throws ShapeException{
         // Shift the shape by the specified rendering offset
         //move(-xOffset, -yOffset);
 
@@ -102,5 +102,38 @@ public class Ellipse extends BaseShape{
 
         // Shift the shape back to its original location
         //move(xOffset, yOffset);
+    }
+
+    public void render(Graphics2D graphics) throws ShapeException{
+        graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
+
+        // Compute the left side of the bounding box
+        int x = (int) Math.round(center.getX() - a);
+
+        // Compute the top side of the bounding box
+        int y = (int) Math.round(center.getY() - a);
+
+        // Compute the width of the bounding box
+        int width = (int) Math.round(a*2);
+
+        // Draw the circle by drawing an oval in a square bounding box
+        if(renderDetails != null){
+            graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
+
+            graphics.setColor(renderDetails.getLineColor());
+            graphics.drawOval(0,0, (int)(2*a), (int)(2*b));
+            if(renderDetails.getFillColor() != null) {//make sure there is a fill color
+                graphics.setColor(renderDetails.getFillColor());
+                graphics.fillOval(0,0, (int)(2*a), (int)(2*b));
+            }
+
+            graphics.translate(-renderDetails.getxPosition(),-renderDetails.getyPosition());
+        }else{
+            graphics.translate(x, y);
+            graphics.setColor(Color.white);//default
+            graphics.drawOval( x, y, width, width);
+
+            graphics.translate(-x, -y);
+        }
     }
 }

@@ -18,7 +18,7 @@ public class CompositeShape extends BaseShape {
         shapeList.clear();
     }
     @Override
-    public void render(Graphics graphics) throws ShapeException {
+    public void render(Graphics2D graphics) throws ShapeException {
         for(Shape s: shapeList){
             s.render(graphics);
         }
