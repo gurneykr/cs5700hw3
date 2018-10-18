@@ -228,9 +228,8 @@ public class Main {
         renderDetails4.setFillColor(Color.RED);
 
         RenderDetails renderDetails5 = new RenderDetails();
-        renderDetails5.setxPosition(100);
+        renderDetails5.setxPosition(0);
         renderDetails5.setyPosition(100);
-
 
         CompositeShape compositeShape = new CompositeShape();
         rectangle.setRenderDetails(renderDetails);

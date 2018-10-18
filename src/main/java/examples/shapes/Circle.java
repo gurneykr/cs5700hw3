@@ -120,4 +120,8 @@ public class Circle extends Ellipse{
         return "<Circle::center=" + center.toString() + ",radius=" +  radius + "::Circle>";
     }
 
+    @Override
+    public double getArea(){
+        return computeArea();
+    }
 }

@@ -79,7 +79,8 @@ public class Rectangle extends BaseShape{
 
     }
 
-    public double getArea() throws ShapeException{
+    @Override
+    public double getArea()throws ShapeException{
         return getHeight() * getWidth();
     }
 

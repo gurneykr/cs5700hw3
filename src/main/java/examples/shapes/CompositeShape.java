@@ -33,4 +33,13 @@ public class CompositeShape extends BaseShape {
     public Shape deserialize(Stream stream) throws ShapeException{
         return null;
     }
+
+    @Override
+    public double getArea() throws ShapeException {
+        double area = 0;
+        for(Shape s: shapeList){
+            area += s.getArea();
+        }
+        return area;
+    }
 }

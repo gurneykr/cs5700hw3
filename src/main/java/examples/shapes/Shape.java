@@ -6,4 +6,5 @@ import java.util.stream.Stream;
 public interface Shape {
     Stream serialize();
     void render(Graphics2D graphics) throws ShapeException;
+    double getArea() throws ShapeException;
 }

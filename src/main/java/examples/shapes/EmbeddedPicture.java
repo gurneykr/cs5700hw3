@@ -43,4 +43,8 @@ public class EmbeddedPicture extends BaseShape {
         }
     }
 
+    @Override
+    public double getArea() throws ShapeException {
+        return img.getWidth() * img.getHeight();
+    }
 }

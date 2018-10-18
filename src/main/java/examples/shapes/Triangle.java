@@ -53,7 +53,7 @@ public class Triangle extends BaseShape{
         return point;
     }
 
-
+    @Override
     public double getArea() throws ShapeException{
         Line ab = new Line(getA(), getB());
         Line ac = new Line(getA(), getC());
