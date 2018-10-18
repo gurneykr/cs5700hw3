@@ -122,8 +122,35 @@ public class Line extends BaseShape{
         return "<Line::point1=" + point1.toString() + ",point2=" + point2.toString() + "::Line>";
     }
 
-    @Override
-    public void render(Graphics2D graphics) throws ShapeException {
+
+    public void renderOrig(Graphics2D graphics) throws ShapeException {
         graphics.drawLine( (int)getPoint1().getX(), (int)getPoint1().getY(), (int)getPoint2().getX(), (int)getPoint2().getY());
+    }
+
+    @Override
+    public void render(Graphics2D graphics) throws ShapeException{
+
+        // Compute the left side of the bounding box
+        int x = (int)point1.getX();
+
+        // Compute the top side of the bounding box
+        int y = (int)point1.getY();
+
+        // Draw the circle by drawing an oval in a square bounding box
+        if(renderDetails != null){
+            graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
+
+            graphics.setColor(renderDetails.getLineColor());
+            graphics.drawLine( (int)getPoint1().getX(), (int)getPoint1().getY(), (int)getPoint2().getX(), (int)getPoint2().getY());
+
+            graphics.translate(-renderDetails.getxPosition(),-renderDetails.getyPosition());
+        }else{
+            graphics.translate(x, y);
+
+            graphics.setColor(Color.white);//default
+            graphics.drawLine((int)getPoint1().getX(), (int)getPoint1().getY(), (int)getPoint2().getX(), (int)getPoint2().getY());
+
+            graphics.translate(-x, -y);
+        }
     }
 }

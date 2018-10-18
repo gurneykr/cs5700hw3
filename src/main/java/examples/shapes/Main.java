@@ -190,27 +190,13 @@ public class Main {
     }
 
     public static void testRender() throws ShapeException, IOException {
-        //Setup
-        //CompositeShape composite = new CompositeShape();
-        //composite.addChildShape(new EmbeddedPicture(44, 55, 80,50, "graphics/dog.jpg"));
 
-//        Point topLeft = new Point(0, 10);
-//        Point topRight = new Point(10, 10);
-//        Point bottomLeft = new Point(0, 10);
-//        Point bottomRight = new Point(10, 0);
-//        Rectangle rectangle = new Rectangle(bottomLeft, bottomRight, topLeft, topRight);
+        Circle circle = new  Circle( 30, 30, 10);
 
-//        Point center2 = new Point(10, 10);
-//        double a2 = 20;
-//        double b2 = 9;
-//        Ellipse ellipse = new Ellipse(center2, a2, b2);
-        Circle circle = new  Circle( 30, 30, 20);
-
-
-        Point topLeft = new Point(10, 20);
+        Point topLeft = new Point(50, 20);
         Point topRight = new Point(20, 20);
-        Point bottomLeft = new Point(10, 10);
-        Point bottomRight = new Point(20, 10);
+        Point bottomLeft = new Point(50, 50);
+        Point bottomRight = new Point(20, 50);
         Rectangle rectangle = new Rectangle(bottomLeft, bottomRight, topLeft, topRight);
 
         Point a = new Point(0, 0);
@@ -223,34 +209,49 @@ public class Main {
 
         Line line = new Line(point1, point2);
 
+        RenderDetails renderDetails = new RenderDetails();
+        renderDetails.setLineColor(Color.BLUE);
+        renderDetails.setFillColor(Color.GREEN);
+
+        RenderDetails renderDetails2 = new RenderDetails();
+        renderDetails2.setLineColor(Color.RED);
+        renderDetails2.setFillColor(Color.WHITE);
+        renderDetails2.setxPosition(30);
+        renderDetails2.setyPosition(60);
+
+        RenderDetails renderDetails3 = new RenderDetails();
+        renderDetails3.setLineColor(Color.PINK);
+        renderDetails3.setFillColor(Color.MAGENTA);
+
+        RenderDetails renderDetails4 = new RenderDetails();
+        renderDetails4.setLineColor(Color.ORANGE);
+        renderDetails4.setFillColor(Color.RED);
+
         CompositeShape compositeShape = new CompositeShape();
-
+        rectangle.setRenderDetails(renderDetails);
         compositeShape.addShape(rectangle);
+
+        circle.setRenderDetails(renderDetails2);
         compositeShape.addShape(circle);
+
+        triangle.setRenderDetails(renderDetails3);
         compositeShape.addShape(triangle);
+
+        line.setRenderDetails(renderDetails4);
         compositeShape.addShape(line);
-
-
 
         BufferedImage bImg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bImg.createGraphics();
 
-
-        RenderDetails renderDetails = new RenderDetails();
-        renderDetails.setLineColor(Color.BLUE);
-        renderDetails.setFillColor(Color.GREEN);
-        triangle.setRenderDetails(renderDetails);
-        triangle.render(graphics);
-
+        compositeShape.setRenderDetails(renderDetails);
         //compositeShape.render(graphics);
 
-        //line.render(graphics, 0, 0);
-        //ellipse.render(graphics, 0,0 );
-        // Stimulus
-        //composite.render(graphics,0, 0);
+        EmbeddedPicture embeddedPicture = new EmbeddedPicture("ocean.jpg");
+        embeddedPicture.render(graphics);
 
         // Write to a file so the results can be compared manually
-        ImageIO.write(bImg, "png", new File("composite.png"));
+        ImageIO.write(bImg, "png", new File("composite.jpg"));
+
 
 
     }

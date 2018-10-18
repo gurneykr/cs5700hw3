@@ -142,10 +142,41 @@ public class Rectangle extends BaseShape{
                     + ",topLeft=" + topLeft.toString() + ",topRight=" + topRight.toString() + "::Rectangle>";
     }
 
-    @Override
-    public void render(Graphics2D graphics) throws ShapeException {
+
+    public void renderOrig(Graphics2D graphics) throws ShapeException {
         graphics.setColor(Color.GREEN);
         graphics.fillRect( (int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
         graphics.drawRect((int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
+    }
+
+    @Override
+    public void render(Graphics2D graphics) throws ShapeException{
+
+        // Compute the left side of the bounding box
+        int x = (int)topLeft.getX();
+
+        // Compute the top side of the bounding box
+        int y = (int)topLeft.getY();
+
+        // Draw the circle by drawing an oval in a square bounding box
+        if(renderDetails != null){
+            graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
+
+            graphics.setColor(renderDetails.getLineColor());
+            graphics.drawRect((int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
+            if(renderDetails.getFillColor() != null) {//make sure there is a fill color
+                graphics.setColor(renderDetails.getFillColor());
+                graphics.fillRect( (int)bottomLeft.getX(), (int)bottomLeft.getY(), (int)getWidth(), (int)getHeight());
+            }
+
+            graphics.translate(-renderDetails.getxPosition(),-renderDetails.getyPosition());
+        }else{
+            graphics.translate(x, y);
+
+            graphics.setColor(Color.white);//default
+            graphics.drawRect(x, y, (int)getWidth(), (int)getHeight());
+
+            graphics.translate(-x, -y);
+        }
     }
 }

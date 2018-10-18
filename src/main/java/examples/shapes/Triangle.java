@@ -118,7 +118,6 @@ public class Triangle extends BaseShape{
 
     @Override
     public void render(Graphics2D graphics) throws ShapeException{
-        graphics.translate(renderDetails.getxPosition(),renderDetails.getyPosition());
 
         // Compute the left side of the bounding box
         int x = (int)a.getX();
