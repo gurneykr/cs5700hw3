@@ -227,6 +227,11 @@ public class Main {
         renderDetails4.setLineColor(Color.ORANGE);
         renderDetails4.setFillColor(Color.RED);
 
+        RenderDetails renderDetails5 = new RenderDetails();
+        renderDetails5.setxPosition(100);
+        renderDetails5.setyPosition(100);
+
+
         CompositeShape compositeShape = new CompositeShape();
         rectangle.setRenderDetails(renderDetails);
         compositeShape.addShape(rectangle);
@@ -240,14 +245,18 @@ public class Main {
         line.setRenderDetails(renderDetails4);
         compositeShape.addShape(line);
 
-        BufferedImage bImg = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bImg = new BufferedImage(500, 500, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bImg.createGraphics();
 
-        compositeShape.setRenderDetails(renderDetails);
-        //compositeShape.render(graphics);
+        EmbeddedPicture embeddedPicture = new EmbeddedPicture("./ocean.jpg");
+        embeddedPicture.setRenderDetails(renderDetails5);
+        //embeddedPicture.render(graphics);
+        compositeShape.addShape(embeddedPicture);
 
-        EmbeddedPicture embeddedPicture = new EmbeddedPicture("ocean.jpg");
-        embeddedPicture.render(graphics);
+        compositeShape.setRenderDetails(renderDetails);
+        compositeShape.render(graphics);
+
+
 
         // Write to a file so the results can be compared manually
         ImageIO.write(bImg, "png", new File("composite.jpg"));
