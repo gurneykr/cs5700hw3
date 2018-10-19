@@ -103,32 +103,8 @@ public class Point extends BaseShape{
 
     @Override
     public Stream serialize() {
-        //<Point::x=123,y=456::Point>
-        //<Circle::radius=1234:center=<Point::x=123:y=456>
-
-       //String obj = "<Point::x="+ this.getX() + ",y=" + this.getY() + "::Point>";
        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
     }
-
-//    @Override
-//    public Shape deserialize(Stream stream) throws ShapeException{
-//        //get the stream into a string
-//        //parse it and create a shape object
-//        String string = (String)stream.collect(Collectors.joining(""));
-//        //System.out.println("deserialized Point is:" + string);
-//
-//        //tokenize the string to it's parts so that we can build a Point object
-//        int startXIndex = string.indexOf("<Point::x=") + 10;
-//        int endXIndex = string.indexOf(",y=");
-//        double x = Double.parseDouble(string.substring(startXIndex, endXIndex));
-//
-//        int startYIndex = string.indexOf(",y=") + 3;
-//        int endYIndex = string.indexOf("::Point>");
-//        double y = Double.parseDouble(string.substring(startYIndex, endYIndex));
-//
-//        return new Point(x, y);
-//    }
-
 
     public static Point deserialize(Stream stream) throws ShapeException{
         Point point = null;
@@ -149,5 +125,10 @@ public class Point extends BaseShape{
     @Override
     public String toString() {
         return "<Point::x="+ this.getX() + ",y=" + this.getY() + "::Point>";
+    }
+
+    @Override
+    public double getArea() throws ShapeException {
+        return 0;
     }
 }
