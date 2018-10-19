@@ -100,11 +100,7 @@ public class Point extends BaseShape{
         return new Point(x, y);
     }
 
-
-    @Override
-    public Stream serialize() {
-       return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
-    }
+    //serialize is now in the BaseShape
 
     public static Point deserialize(Stream stream) throws ShapeException{
         Point point = null;

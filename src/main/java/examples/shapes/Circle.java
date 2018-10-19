@@ -1,6 +1,5 @@
 package examples.shapes;
 
-import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -89,10 +88,7 @@ public class Circle extends Ellipse{
         return Math.PI * Math.pow(radius, 2);
     }
 
-    @Override
-    public Stream serialize() {
-        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
-    }
+    //Serialize method is now in the BaseShape
 
     //@Override
     public static Circle deserialize(Stream stream)throws ShapeException {

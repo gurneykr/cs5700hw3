@@ -22,24 +22,24 @@ public class Main {
 //        }
 //    }
 
-//    public static void main(String args[]){
-//        System.out.println("Hello shapes");
-//        try{
-//            Point topLeft = new Point(0, 1);
-//            Point topRight = new Point(1, 1);
-//            Point bottomLeft = new Point(0, 0);
-//            Point bottomRight = new Point(1, 0);
-//
-//            Rectangle rectangle = new Rectangle(bottomLeft,bottomRight, topLeft, topRight);
-//
-//
-//            Stream s1 = rectangle.serialize();
-//            Rectangle p2 = Rectangle.deserialize(s1);
-//            System.out.println("Deserialized rectangle =>" + p2.toString());
-//        }catch(ShapeException e){
-//            e.printStackTrace();
-//        }
-//    }
+    public static void main(String args[]){
+        System.out.println("Hello shapes");
+        try{
+            Point topLeft = new Point(0, 1);
+            Point topRight = new Point(1, 1);
+            Point bottomLeft = new Point(0, 0);
+            Point bottomRight = new Point(1, 0);
+
+            Square square = new Square(bottomLeft,bottomRight, topLeft, topRight);
+
+
+            Stream s1 = square.serialize();
+            Shape p2 = Square.deserialize(s1);
+            System.out.println("Deserialized square =>" + p2.toString());
+        }catch(ShapeException e){
+            e.printStackTrace();
+        }
+    }
 
 //    public static void main(String args[]){
 //        System.out.println("Hello lines");
@@ -75,7 +75,7 @@ public class Main {
 //        }
 //    }
 
-    public static void main(String args[]){
+    public static void main2(String args[]){
         List<Shape> shapeList = new ArrayList();
 
         try {
@@ -83,8 +83,6 @@ public class Main {
             double radius = 5;
             Circle circle = new Circle(center, radius);
             shapeList.add(circle);
-            //System.out.println(circle.toSVG(5,5));
-            //circle.render();
 
             Point a = new Point(0, 0);
             Point b = new Point(1, 0);
@@ -116,6 +114,9 @@ public class Main {
             Point point2 = new Point(1, 1);
             Line line = new Line(point1, point2);
             shapeList.add(line);
+
+            EmbeddedPicture embeddedPicture = new EmbeddedPicture("ocean.jpg");
+            shapeList.add(embeddedPicture);
 
             testRender();
 
@@ -249,7 +250,7 @@ public class Main {
 
         EmbeddedPicture embeddedPicture = new EmbeddedPicture("./ocean.jpg");
         embeddedPicture.setRenderDetails(renderDetails5);
-        //embeddedPicture.render(graphics);
+        embeddedPicture.render(graphics);
         compositeShape.addShape(embeddedPicture);
 
         compositeShape.setRenderDetails(renderDetails);

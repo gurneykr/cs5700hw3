@@ -1,7 +1,5 @@
 package examples.shapes;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,7 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -55,11 +52,6 @@ public class EmbeddedPicture extends BaseShape {
             baos.flush();
             imageInByte = baos.toByteArray();
             baos.close();
-
-            String byteString = "";
-            for(int i=0; i < imageInByte.length; i++) {
-                byteString += imageInByte[i];
-            }
 
             output = "<EmbeddedPicture::bytes="+ java.util.Base64.getEncoder().encodeToString(imageInByte) + "::EmbeddedPicture>";
         } catch(IOException e) {

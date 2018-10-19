@@ -98,18 +98,14 @@ public class Rectangle extends BaseShape{
         topRight.moveY(y);
     }
 
-    @Override
-    public Stream serialize() {
-        //<Rectangle::bottomLeft=<Point::x=123,y=456::Point>,bottomRight=<Point::x=123,y=456::Point>,
-        // topLeft=<Point::x=123,y=456::Point>,topRight=<Point::x=123,y=456::Point>::Rectangle>
-        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
-    }
+    //serialize is now in the BaseShape
 
-    public static Rectangle deserialize(Stream stream) throws ShapeException{
+
+    public static Shape deserialize(Stream stream) throws ShapeException{
         return deserialize(stream,"Rectangle");
     }
 
-    protected static Rectangle deserialize(Stream stream, String shapeType) throws ShapeException{
+    protected static Shape deserialize(Stream stream, String shapeType) throws ShapeException{
         Rectangle rectangle = null;
         String string = (String)stream.collect(Collectors.joining(""));
 

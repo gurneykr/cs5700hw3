@@ -24,10 +24,7 @@ public class CompositeShape extends BaseShape {
         }
     }
 
-    @Override
-    public Stream serialize() {
-        return null;
-    }
+   //serialize is now in the BaseShape
 
     //@Override
     public Shape deserialize(Stream stream) throws ShapeException{

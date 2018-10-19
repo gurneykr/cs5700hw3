@@ -21,6 +21,8 @@ public class ShapeFactory {
                 shape = Ellipse.deserialize(stream);
             }else if(shapeString.startsWith("<Triangle::")){
                 shape = Triangle.deserialize(stream);
+            }else if(shapeString.startsWith("<EmbeddedPicture::")){
+                shape = EmbeddedPicture.deserialize(stream);
             }
         }catch (ShapeException e){
             e.printStackTrace();

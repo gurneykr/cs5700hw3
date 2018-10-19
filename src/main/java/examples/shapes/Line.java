@@ -89,11 +89,12 @@ public class Line extends BaseShape{
         return (point2.getX() - point1.getX())/(point2.getY() - point1.getY());
     }
 
-
     @Override
-    public Stream serialize() {
-        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
+    public double getArea() throws ShapeException {
+        return 0;
     }
+
+    //serialize is now in the BaseShape
 
     //@Override
     public static Line deserialize(Stream stream) throws ShapeException{
@@ -120,11 +121,6 @@ public class Line extends BaseShape{
     @Override
     public String toString() {
         return "<Line::point1=" + point1.toString() + ",point2=" + point2.toString() + "::Line>";
-    }
-
-
-    public void renderOrig(Graphics2D graphics) throws ShapeException {
-        graphics.drawLine( (int)getPoint1().getX(), (int)getPoint1().getY(), (int)getPoint2().getX(), (int)getPoint2().getY());
     }
 
     @Override

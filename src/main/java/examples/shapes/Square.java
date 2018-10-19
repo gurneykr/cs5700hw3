@@ -9,7 +9,7 @@ public class Square extends Rectangle{
         Validator.validateEqualSides(bottomLeft, bottomRight,topLeft, topRight);
     }
 
-    public static Rectangle deserialize(Stream stream) throws ShapeException{
+    public static Shape deserialize(Stream stream) throws ShapeException{
         return deserialize(stream,"Square");
     }
 

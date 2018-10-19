@@ -49,10 +49,7 @@ public class Ellipse extends BaseShape{
         center.moveY(y);
     }
 
-    @Override
-    public Stream serialize() {
-        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
-    }
+    //serialize is now in the BaseShape
 
     // @Override
     public static Ellipse deserialize(Stream stream) throws ShapeException{
