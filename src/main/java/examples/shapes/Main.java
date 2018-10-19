@@ -22,24 +22,24 @@ public class Main {
 //        }
 //    }
 
-    public static void main(String args[]){
-        System.out.println("Hello shapes");
-        try{
-            Point topLeft = new Point(0, 1);
-            Point topRight = new Point(1, 1);
-            Point bottomLeft = new Point(0, 0);
-            Point bottomRight = new Point(1, 0);
-
-            Square square = new Square(bottomLeft,bottomRight, topLeft, topRight);
-
-
-            Stream s1 = square.serialize();
-            Shape p2 = Square.deserialize(s1);
-            System.out.println("Deserialized square =>" + p2.toString());
-        }catch(ShapeException e){
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String args[]){
+//        System.out.println("Hello shapes");
+//        try{
+//            Point topLeft = new Point(0, 1);
+//            Point topRight = new Point(1, 1);
+//            Point bottomLeft = new Point(0, 0);
+//            Point bottomRight = new Point(1, 0);
+//
+//            Square square = new Square(bottomLeft,bottomRight, topLeft, topRight);
+//
+//
+//            Stream s1 = square.serialize();
+//            Shape p2 = Square.deserialize(s1);
+//            System.out.println("Deserialized square =>" + p2.toString());
+//        }catch(ShapeException e){
+//            e.printStackTrace();
+//        }
+//    }
 
 //    public static void main(String args[]){
 //        System.out.println("Hello lines");
@@ -75,7 +75,7 @@ public class Main {
 //        }
 //    }
 
-    public static void main2(String args[]){
+    public static void main(String args[]){
         List<Shape> shapeList = new ArrayList();
 
         try {

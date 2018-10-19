@@ -106,7 +106,7 @@ public class Rectangle extends BaseShape{
     }
 
     protected static Shape deserialize(Stream stream, String shapeType) throws ShapeException{
-        Rectangle rectangle = null;
+        Shape shape  = null;
         String string = (String)stream.collect(Collectors.joining(""));
 
         String regX = "<" + shapeType + "::bottomLeft=(\\S+),bottomRight=(\\S+),topLeft=(\\S+),topRight=(\\S+)::" + shapeType + ">";
@@ -129,9 +129,13 @@ public class Rectangle extends BaseShape{
             Stream streamTopRight = topRight.codePoints().mapToObj(c -> String.valueOf((char) c));
             Point topRightPoint = Point.deserialize(streamTopRight);
 
-            rectangle = new Rectangle(bottomLeftPoint, bottomRightPoint,topLeftPoint,topRightPoint);
+            if(shapeType.equals("Rectangle")) {
+                shape = new Rectangle(bottomLeftPoint, bottomRightPoint, topLeftPoint, topRightPoint);
+            }else{
+                shape = new Square(bottomLeftPoint, bottomRightPoint, topLeftPoint, topRightPoint);
+            }
         }
-        return rectangle;
+        return shape;
     }
     @Override
     public String toString() {
