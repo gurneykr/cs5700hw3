@@ -2,6 +2,8 @@ package examples.shapes;
 
 import org.junit.Test;
 
+import java.util.stream.Stream;
+
 import static org.junit.Assert.*;
 
 public class PointTest {
@@ -224,5 +226,35 @@ public class PointTest {
         assertNotSame(p1, p2);
         assertEquals(p1.getX(), p2.getX(), 0);
         assertEquals(p1.getY(), p2.getY(), 0);
+    }
+    @Test
+    public void testDeserialize(){
+        try {
+            String string = "<Point::x=1.0,y=2.0::Point>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point point = Point.deserialize(stream);
+            assertNotNull(point);
+            assertEquals(point instanceof Point, true);
+            assertEquals(point.getX() == 1.0, true);
+            assertEquals(point.getY() == 2.0, true);
+
+        }catch (ShapeException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testInvalidDeserialize(){
+        try {
+            String string = "<Point::x=,y=2.0::Point>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Point point = Point.deserialize(stream);
+            assertEquals(true, false);
+
+        }catch (ShapeException e){
+            assertEquals(true, true);
+        }
+
     }
 }

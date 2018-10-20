@@ -112,8 +112,15 @@ public class Point extends BaseShape{
         if(m.find()){
             String xString = m.group(1);
             String yString = m.group(2);
-            point = new Point(Double.parseDouble(xString), Double.parseDouble(yString));
+            if((xString != null) || (yString != null)) {
+                point = new Point(Double.parseDouble(xString), Double.parseDouble(yString));
+            }else{
+                throw new ShapeException("Invalid point");
+            }
+        }else{
+            throw new ShapeException("Invalid point");
         }
+
         return point;
     }
 
