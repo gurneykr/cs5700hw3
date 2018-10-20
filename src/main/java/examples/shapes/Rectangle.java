@@ -134,6 +134,8 @@ public class Rectangle extends BaseShape{
             }else{
                 shape = new Square(bottomLeftPoint, bottomRightPoint, topLeftPoint, topRightPoint);
             }
+        }else{
+            throw new ShapeException("Invalid points");
         }
         return shape;
     }

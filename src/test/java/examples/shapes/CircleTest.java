@@ -249,9 +249,9 @@ public class CircleTest {
             Circle circle = Circle.deserialize(stream);
             assertNotNull(circle);
             assertEquals(circle instanceof Circle, true);
-            assertEquals(circle.getCenter().getX() == 5, true);
-            assertEquals(circle.getCenter().getY() == 6, true);
-            assertEquals(circle.getRadius() == 10, true);
+            assertEquals(circle.getCenter().getX() == 5.0, true);
+            assertEquals(circle.getCenter().getY() == 6.0, true);
+            assertEquals(circle.getRadius() == 10.0, true);
 
         }catch (ShapeException e){
             e.printStackTrace();

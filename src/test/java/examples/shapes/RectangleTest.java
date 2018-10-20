@@ -2,6 +2,8 @@ package examples.shapes;
 
 import org.junit.Test;
 
+import java.util.stream.Stream;
+
 import static org.junit.Assert.*;
 
 public class RectangleTest {
@@ -143,5 +145,45 @@ public class RectangleTest {
         assertEquals(rectangle.getTopRight(), expectedTopRight2);
         assertEquals(rectangle.getBottomLeft(), expectedBottomLeft2);
         assertEquals(rectangle.getBottomRight(), expectedBottomRight2);
+    }
+    @Test
+    public void testDeserialize(){
+        try {
+            String string = "<Rectangle::bottomLeft=(<Point::x=0.0,y=0.0::Point>,bottomRight=<Point::x=1.0," +
+                    "y=0.0::Point>,topLeft=<Point::x=0.0,y=1.0::Point>,topRight=<Point::x=1.0,y=1.0::Point>::Rectangle>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Shape shape = Rectangle.deserialize(stream);
+            Rectangle rectangle = (Rectangle) shape;
+            assertNotNull(rectangle);
+            assertEquals(rectangle instanceof Rectangle, true);
+            assertEquals(rectangle.getBottomLeft().getX() == 0.0, true);
+            assertEquals(rectangle.getBottomLeft().getY() == 0.0, true);
+
+            assertEquals(rectangle.getBottomRight().getX() == 1.0, true);
+            assertEquals(rectangle.getBottomRight().getY() == 0.0, true);
+
+            assertEquals(rectangle.getTopLeft().getX() == 0.0, true);
+            assertEquals(rectangle.getTopLeft().getY() == 1.0, true);
+
+            assertEquals(rectangle.getTopRight().getX() == 1.0, true);
+            assertEquals(rectangle.getTopRight().getY() == 1.0, true);
+
+        }catch (ShapeException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testInvalidDeserialize(){
+        try {
+            String string = "<Rectangle::bottomLeft=0.0::Point>,bottomRight=<Point::x=1.0," +
+                    "y=0.0::Point>,topLeft=<Point::x=0.0,y=1.0::Point>,topRight=<Point::x=1.0,y=1.0::Point>::Rectangle>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Shape shape = Rectangle.deserialize(stream);
+            Rectangle rectangle = (Rectangle) shape;
+            assertEquals(true, false);
+        }catch (ShapeException e){
+            assertEquals(true, true);
+        }
     }
 }
