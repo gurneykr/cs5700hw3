@@ -89,7 +89,7 @@ public class ValidatorTest {
 
             fail("Expected exception not thrown");
         }catch (ShapeException ex){
-            assertEquals("Invalid Rectangle, needs to have right angles.", ex.getMessage());
+            assertEquals("Not a right angle", ex.getMessage());
         }
 
     }

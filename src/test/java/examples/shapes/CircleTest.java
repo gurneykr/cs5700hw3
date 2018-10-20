@@ -2,6 +2,8 @@ package examples.shapes;
 
 import org.junit.Test;
 
+import java.util.stream.Stream;
+
 import static org.junit.Assert.*;
 
 public class CircleTest {
@@ -236,6 +238,37 @@ public class CircleTest {
 
         myCircle = new Circle(1, 2, 0);
         assertEquals(0, myCircle.computeArea(), 0);
+
+    }
+
+    @Test
+    public void testDeserialize(){
+        try {
+            String string = "<Circle::center=<Point::x=5.0,y=6.0::Point>,radius=10.0::Circle>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Circle circle = Circle.deserialize(stream);
+            assertNotNull(circle);
+            assertEquals(circle instanceof Circle, true);
+            assertEquals(circle.getCenter().getX() == 5, true);
+            assertEquals(circle.getCenter().getY() == 6, true);
+            assertEquals(circle.getRadius() == 10, true);
+
+        }catch (ShapeException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testInvalidDeserialize(){//expect to fail
+        try {
+            String string = "<Circle::center=12,radius=10.0::Circle>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Circle circle = Circle.deserialize(stream);
+            assertEquals(true, false);
+        }catch (ShapeException e){
+            assertEquals(true, true);
+        }
 
     }
 

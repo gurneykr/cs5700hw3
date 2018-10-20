@@ -105,8 +105,11 @@ public class Circle extends Ellipse{
 
             String radius = m.group(2);
 
-
-            circle = new Circle(center, Double.parseDouble(radius));
+            if(center != null) {
+                circle = new Circle(center, Double.parseDouble(radius));
+            }else{
+                throw new ShapeException("Invalid center point");
+            }
         }
         return circle;
     }
