@@ -6,7 +6,6 @@ public class RenderDetails {//use of the Flyweight Pattern
 
     Color lineColor = Color.BLACK;
     Color fillColor = Color.WHITE;
-    float lineWidth = 3.0f;
     int xPosition = 5;
     int yPosition = 5;
 
@@ -24,14 +23,6 @@ public class RenderDetails {//use of the Flyweight Pattern
 
     public void setFillColor(Color fillColor) {
         this.fillColor = fillColor;
-    }
-
-    public float getLineWidth() {
-        return lineWidth;
-    }
-
-    public void setLineWidth(float lineWidth) {
-        this.lineWidth = lineWidth;
     }
 
     public int getxPosition() {

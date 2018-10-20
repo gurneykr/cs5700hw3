@@ -80,11 +80,6 @@ public class Triangle extends BaseShape{
         c.moveY(y);
     }
 
-    @Override
-    public Stream serialize() {
-        return this.toString().codePoints().mapToObj(c -> String.valueOf((char) c));
-    }
-
     //@Override
     public static Triangle deserialize(Stream stream) throws ShapeException{
         Triangle triangle = null;
