@@ -185,6 +185,8 @@ public class Main {
             System.out.println("File not found");
         }catch (IOException e) {
             e.printStackTrace();
+        }catch (ShapeException e){
+            e.printStackTrace();
         }
 
         return shapeList;
