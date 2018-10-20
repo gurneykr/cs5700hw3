@@ -22,7 +22,6 @@ public class Ellipse extends BaseShape{
         this.center = center.copy();
         this.a = a;
         this.b = b;
-
     }
 
     public Point getCenter()throws ShapeException{
@@ -37,6 +36,14 @@ public class Ellipse extends BaseShape{
     public double getArea(){
         //area= pi*a*b
         return Math.PI * a * b;
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public double getB() {
+        return b;
     }
 
     //move the ellipse
@@ -68,7 +75,11 @@ public class Ellipse extends BaseShape{
 
             String b = m.group(3);
 
-            ellipse = new Ellipse(center, Double.parseDouble(a),Double.parseDouble(b));
+            if(center != null) {
+                ellipse = new Ellipse(center, Double.parseDouble(a), Double.parseDouble(b));
+            }else{
+                throw new ShapeException("Invalid ellipse");
+            }
         }
         return ellipse;
     }

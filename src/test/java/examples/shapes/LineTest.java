@@ -2,6 +2,8 @@ package examples.shapes;
 
 import org.junit.Test;
 
+import java.util.stream.Stream;
+
 import static org.junit.Assert.*;
 
 public class LineTest {
@@ -150,6 +152,37 @@ public class LineTest {
 
         myLine = new Line(4, 2, 2, 2);
         assertEquals(Double.NEGATIVE_INFINITY, myLine.computeSlope(), 0.1);
+    }
+    @Test
+    public void testDeserialize(){
+        try {
+            String string = "<Line::point1=<Point::x=0.0,y=1.0::Point>,point2=<Point::x=2.0,y=3.0::Point>::Line>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Line line = Line.deserialize(stream);
+            assertNotNull(line);
+            assertEquals(line instanceof Line, true);
+            assertEquals(line.getPoint1().getX() == 0.0, true);
+            assertEquals(line.getPoint1().getY() == 1.0, true);
+            assertEquals(line.getPoint2().getX() == 2.0, true);
+            assertEquals(line.getPoint2().getY() == 3.0, true);
+
+        }catch (ShapeException e){
+            e.printStackTrace();
+        }
+
+    }
+    @Test
+    public void testInvalidDeserialize(){
+        try {
+            String string = "<Line::point1=0,point2=<Point::x=2.0,y=3.0::Point>::Line>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Line line = Line.deserialize(stream);
+            assertEquals(true, false);
+
+        }catch (ShapeException e){
+            assertEquals(true, true);
+        }
+
     }
 
 }

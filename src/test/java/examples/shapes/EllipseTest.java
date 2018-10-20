@@ -2,6 +2,8 @@ package examples.shapes;
 
 import org.junit.Test;
 
+import java.util.stream.Stream;
+
 import static org.junit.Assert.*;
 
 public class EllipseTest {
@@ -54,6 +56,39 @@ public class EllipseTest {
         ellipse.move(1, 3);
         Point expectedCenter = new Point(center.getX()+1, center.getY()+3);
         assertEquals(ellipse.getCenter(), expectedCenter);
+
+    }
+
+    @Test
+    public void testDeserialize(){
+        try {
+            String string = "<Ellipse::center=<Point::x=6.0,y=7.0::Point>,a=8.0,b=9.0::Ellipse>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Ellipse ellipse = Ellipse.deserialize(stream);
+            assertNotNull(ellipse);
+            assertEquals(ellipse instanceof Ellipse, true);
+            assertEquals(ellipse.getCenter().getX() == 6, true);
+            assertEquals(ellipse.getCenter().getY() == 7, true);
+            assertEquals(ellipse.getA() == 8, true);
+            assertEquals(ellipse.getB() == 9, true);
+
+        }catch (ShapeException e){
+            assertEquals(true, false);
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testInvalidDeserialize(){//expect to fail
+        try {
+            String string = "<Ellipse::center=12,a=8,b=9::Ellipse>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Ellipse ellipse = Ellipse.deserialize(stream);
+            assertEquals(true, false);
+        }catch (ShapeException e){
+            assertEquals(true, true);
+        }
 
     }
 }

@@ -113,7 +113,11 @@ public class Line extends BaseShape{
             Stream streamPoint2 = point2String.codePoints().mapToObj(c -> String.valueOf((char) c));
             Point point2 = Point.deserialize(streamPoint2);
 
-            line = new Line(point1, point2);
+            if((point1 != null) || (point2 != null)){
+                line = new Line(point1, point2);
+            }else{
+                throw new ShapeException("Invalid points");
+            }
         }
         return line;
     }
