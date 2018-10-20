@@ -76,7 +76,6 @@ public class EllipseTest {
             assertEquals(true, false);
             e.printStackTrace();
         }
-
     }
 
     @Test

@@ -107,6 +107,8 @@ public class Triangle extends BaseShape{
             Point c = Point.deserialize(streamC);
 
             triangle = new Triangle(a, b,c);
+        }else{
+            throw new ShapeException("Invalid triangle points");
         }
         return triangle;
     }

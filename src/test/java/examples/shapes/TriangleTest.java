@@ -2,7 +2,10 @@ package examples.shapes;
 
 import org.junit.Test;
 
+import java.util.stream.Stream;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 public class TriangleTest {
@@ -77,5 +80,41 @@ public class TriangleTest {
         double area = triangle.getArea();
 
         assertEquals(2, area, 0.0000001);
+    }
+
+    @Test
+    public void testDeserialize(){
+        try {
+            String string = "<Triangle::a=<Point::x=1.0,y=1.0::Point>,b=<Point::x=2.0,y=3.0::Point>,c=<Point::x=3.0,y=1.0::Point>::Triangle>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Triangle triangle = Triangle.deserialize(stream);
+            assertNotNull(triangle);
+            assertEquals(triangle instanceof Triangle, true);
+            assertEquals(triangle.getA().getX() == 1.0, true);
+            assertEquals(triangle.getA().getY() == 1.0, true);
+
+            assertEquals(triangle.getB().getX() == 2.0, true);
+            assertEquals(triangle.getB().getY() == 3.0, true);
+
+            assertEquals(triangle.getC().getX() == 3.0, true);
+            assertEquals(triangle.getC().getY() == 1.0, true);
+
+        }catch (ShapeException e){
+            assertEquals(true, false);
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testInvalidDeserialize(){
+        try {
+            String string = "<Triangle::a=0.0,b=<Point::x=2.0,y=3.0::Point>,c=<Point::x=3.0,y=1.0::Point>::Triangle>";
+            Stream stream = string.codePoints().mapToObj(c -> String.valueOf((char) c));
+            Triangle triangle = Triangle.deserialize(stream);
+            assertEquals(true, false);
+
+        }catch (ShapeException e){
+            assertEquals(true, true);
+        }
     }
 }
