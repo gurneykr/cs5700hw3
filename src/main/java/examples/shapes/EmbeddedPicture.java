@@ -44,15 +44,16 @@ public class EmbeddedPicture extends BaseShape {
 
     @Override
     public String toString() {
-        String output = "<EmbeddedPicture></EmbeddedPicture";
+        String output = "<EmbeddedPicture></EmbeddedPicture";//default
         byte[] imageInByte = null;
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(img, "jpg", baos);
+            ImageIO.write(img, "jpg", baos);//writing bytes from img to baos
             baos.flush();
-            imageInByte = baos.toByteArray();
+            imageInByte = baos.toByteArray();//convert to ByteArray
             baos.close();
 
+            //base64 encode byteArray for storage in the file
             output = "<EmbeddedPicture::bytes="+ java.util.Base64.getEncoder().encodeToString(imageInByte) + "::EmbeddedPicture>";
         } catch(IOException e) {
             e.printStackTrace();

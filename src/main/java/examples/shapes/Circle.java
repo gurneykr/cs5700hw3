@@ -100,8 +100,8 @@ public class Circle extends Ellipse{
         Matcher m = p.matcher(string);
         if(m.find()){
             String centerString = m.group(1);
-            Stream streamCenter = centerString.codePoints().mapToObj(c -> String.valueOf((char) c));
-            Point center = Point.deserialize(streamCenter);
+            Stream streamCenter = centerString.codePoints().mapToObj(c -> String.valueOf((char) c));//turn String into Stream
+            Point center = Point.deserialize(streamCenter);//Asking Point to construct a new point from the Stream
 
             String radius = m.group(2);
 

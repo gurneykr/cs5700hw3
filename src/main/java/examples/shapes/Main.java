@@ -10,72 +10,73 @@ import java.util.stream.Stream;
 import java.io.IOException;
 
 public class Main {
-//    public static void main(String args[]){
-//        System.out.println("Hello shapes");
-//        try{
-//            Point p1 = new Point(11, 22);
-//            Stream s1 = p1.serialize();
-//            Point p2 = (Point)p1.deserialize(s1);
-//            System.out.println("Deserialized point =>" + p2.toString());
-//        }catch(ShapeException e){
-//            e.printStackTrace();
-//        }
-//    }
+    public static void pointDemo(String args[]){
+        System.out.println("Hello shapes");
+        try{
+            Point p1 = new Point(11, 22);
+            Stream s1 = p1.serialize();
+            Point p2 = (Point)p1.deserialize(s1);
+            System.out.println("Deserialized point =>" + p2.toString());
+        }catch(ShapeException e){
+            e.printStackTrace();
+        }
+    }
 
-//    public static void main(String args[]){
-//        System.out.println("Hello shapes");
-//        try{
-//            Point topLeft = new Point(0, 1);
-//            Point topRight = new Point(1, 1);
-//            Point bottomLeft = new Point(0, 0);
-//            Point bottomRight = new Point(1, 0);
-//
-//            Square square = new Square(bottomLeft,bottomRight, topLeft, topRight);
-//
-//
-//            Stream s1 = square.serialize();
-//            Shape p2 = Square.deserialize(s1);
-//            System.out.println("Deserialized square =>" + p2.toString());
-//        }catch(ShapeException e){
-//            e.printStackTrace();
-//        }
-//    }
+    public static void squareDemo(){
+        System.out.println("Hello shapes");
+        try{
+            Point topLeft = new Point(0, 1);
+            Point topRight = new Point(1, 1);
+            Point bottomLeft = new Point(0, 0);
+            Point bottomRight = new Point(1, 0);
 
-//    public static void main(String args[]){
-//        System.out.println("Hello lines");
-//        try{
-//            Point point1 = new Point(0, 1);
-//            Point point2 = new Point(1, 1);
-//
-//            Line line = new Line(point1, point2);
-//
-//            Stream s1 = line.serialize();
-//            Line p2 = Line.deserialize(s1);
-//            System.out.println("Deserialized line =>" + p2.toString());
-//        }catch(ShapeException e){
-//            e.printStackTrace();
-//        }
-//    }
+            Square square = new Square(bottomLeft,bottomRight, topLeft, topRight);
 
-//
 
-//    public static void main(String args[]){
-//        System.out.println("Hello Ellipse");
-//        try{
-//            Point center = new Point(0, 1);
-//            double a = 5;
-//            double b = 3;
-//            Ellipse ellipse = new Ellipse(center, a, b);
-//
-//            Stream s1 = ellipse.serialize();
-//            Ellipse p2 = Ellipse.deserialize(s1);
-//            System.out.println("Deserialized Ellipse =>" + p2.toString());
-//        }catch(ShapeException e){
-//            e.printStackTrace();
-//        }
-//    }
+            Stream s1 = square.serialize();
+            Shape p2 = Square.deserialize(s1);
+            System.out.println("Deserialized square =>" + p2.toString());
+        }catch(ShapeException e){
+            e.printStackTrace();
+        }
+    }
 
-    public static void main(String args[]){
+    public static void lineDemo(){
+        System.out.println("Hello lines");
+        try{
+            Point point1 = new Point(0, 1);
+            Point point2 = new Point(1, 1);
+
+            Line line = new Line(point1, point2);
+
+            Stream s1 = line.serialize();
+            Line p2 = Line.deserialize(s1);
+            System.out.println("Deserialized line =>" + p2.toString());
+        }catch(ShapeException e){
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public static void ellipseDemo(){
+        System.out.println("Hello Ellipse");
+        try{
+            Point center = new Point(0, 1);
+            double a = 5;
+            double b = 3;
+            Ellipse ellipse = new Ellipse(center, a, b);
+
+            Stream s1 = ellipse.serialize();
+            Ellipse p2 = Ellipse.deserialize(s1);
+            System.out.println("Deserialized Ellipse =>" + p2.toString());
+        }catch(ShapeException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void readWriteScript(){
         List<Shape> shapeList = new ArrayList();
 
         try {
@@ -118,12 +119,8 @@ public class Main {
             EmbeddedPicture embeddedPicture = new EmbeddedPicture("ocean.jpg");
             shapeList.add(embeddedPicture);
 
-            testRender();
-
         }catch(ShapeException e){
                 e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
         }
         writeShapesToFile(shapeList,"test.txt");
 
@@ -192,7 +189,7 @@ public class Main {
         return shapeList;
     }
 
-    public static void testRender() throws ShapeException, IOException {
+    public static void renderDemo() throws ShapeException, IOException {
 
         Circle circle = new  Circle( 30, 30, 10);
 
@@ -258,12 +255,20 @@ public class Main {
         compositeShape.setRenderDetails(renderDetails);
         compositeShape.render(graphics);
 
-
-
         // Write to a file so the results can be compared manually
         ImageIO.write(bImg, "png", new File("composite.jpg"));
 
+    }
 
+    public static void main(String args[]){
+        try {
+            readWriteScript();
+            renderDemo();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (ShapeException e){
+            e.printStackTrace();
+        }
 
     }
 }
